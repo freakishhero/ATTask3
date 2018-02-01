@@ -39,9 +39,9 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	camera = std::make_unique<FollowCamera>(0.25f * XM_PI, game_data.aspect_ratio, 1.0f,
 		10000.0f, nullptr, Vector3(0, 0, -100));
 
-	Sprite* grass = new Sprite("../Debug/grass", _pd3dDevice);
-	Sprite* dirt = new Sprite("../Debug/dirt", _pd3dDevice);
-	Sprite* stone = new Sprite("../Debug/stone", _pd3dDevice);
+	Sprite* grass = new Sprite(L"../Assets/grass.dds", _pd3dDevice);
+	Sprite* dirt = new Sprite(L"../Assets/dirt.dds", _pd3dDevice);
+	Sprite* stone = new Sprite(L"../Assets/stone.dds", _pd3dDevice);
 
 	// Player
 	int x = 0;

@@ -1,11 +1,11 @@
-﻿Build started 01/02/2018 22:59:44.
-     1>Project "D:\ATTask3\DXTK\DXTK.vcxproj" on node 2 (Build target(s)).
+﻿Build started 01/02/2018 23:33:00.
+     1>Project "D:\AT WORKING TASK\ATTask3\DXTK\DXTK.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\amd64_x86\CL.exe /c /ID:\ATTask3\packages\directxtk_desktop_2015.2017.12.13.1\build\native\../..//build/native/include/ /ZI /nologo /W3 /WX- /Od /Oy- /D HAS_DIRECTXTK /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /arch:SSE2 /fp:fast /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\amd64_x86\CL.exe /c /I"D:\AT WORKING TASK\ATTask3\packages\directxtk_desktop_2015.2017.12.13.1\build\native\../..//build/native/include/" /ZI /nologo /W3 /WX- /Od /Oy- /D HAS_DIRECTXTK /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /arch:SSE2 /fp:fast /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp
          Game.cpp
-     1>d:\attask3\dxtk\game.cpp(61): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+     1>d:\at working task\attask3\dxtk\game.cpp(61): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\amd64_x86\link.exe /ERRORREPORT:PROMPT /OUT:"D:\ATTask3\Debug\DXTK.exe" /INCREMENTAL /NOLOGO D:\ATTask3\packages\directxtk_desktop_2015.2017.12.13.1\build\native\../..//build/native/lib/Win32\Debug\DirectXTKAudioDX.lib D:\ATTask3\packages\directxtk_desktop_2015.2017.12.13.1\build\native\../..//build/native/lib/Win32\Debug\DirectXTK.lib d3d11.lib dxguid.lib uuid.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /manifestinput:settings.manifest /Debug /PDB:"D:\ATTask3\Debug\DXTK.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\ATTask3\Debug\DXTK.lib" /MACHINE:X86 Debug\resource.res
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\amd64_x86\link.exe /ERRORREPORT:PROMPT /OUT:"D:\AT WORKING TASK\ATTask3\Debug\DXTK.exe" /INCREMENTAL /NOLOGO "D:\AT WORKING TASK\ATTask3\packages\directxtk_desktop_2015.2017.12.13.1\build\native\../..//build/native/lib/Win32\Debug\DirectXTKAudioDX.lib" "D:\AT WORKING TASK\ATTask3\packages\directxtk_desktop_2015.2017.12.13.1\build\native\../..//build/native/lib/Win32\Debug\DirectXTK.lib" d3d11.lib dxguid.lib uuid.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /manifestinput:settings.manifest /Debug /PDB:"D:\AT WORKING TASK\ATTask3\Debug\DXTK.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\AT WORKING TASK\ATTask3\Debug\DXTK.lib" /MACHINE:X86 Debug\resource.res
          Debug\Application.obj
          Debug\Camera.obj
          Debug\FollowCamera.obj
@@ -17,10 +17,9 @@
          Debug\Player.obj
          Debug\Sprite.obj
          Debug\SpriteGameObject.obj
-         Debug\StringUtils.obj
-         DXTK.vcxproj -> D:\ATTask3\Debug\DXTK.exe
-     1>Done Building Project "D:\ATTask3\DXTK\DXTK.vcxproj" (Build target(s)).
+         DXTK.vcxproj -> D:\AT WORKING TASK\ATTask3\Debug\DXTK.exe
+     1>Done Building Project "D:\AT WORKING TASK\ATTask3\DXTK\DXTK.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:02.17
+Time Elapsed 00:00:02.08
