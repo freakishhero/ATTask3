@@ -1,16 +1,6 @@
 #pragma once
 #include "SpriteGameObject.h"
 
-class TextureManager;
-class Texture;
-class AudioManager;
-class PhysicsComponent;
-class Tile;
-
-//=================================================================
-//Base Player Class (i.e. a GO the player controls)
-//=================================================================
-
 class Player : public SpriteGameObject
 {
 public:

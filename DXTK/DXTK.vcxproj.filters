@@ -54,6 +54,15 @@
     <ClInclude Include="Player.h">
       <Filter>Header</Filter>
     </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="TileType.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="TileManager.h">
+      <Filter>Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -85,6 +94,12 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="TileManager.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>

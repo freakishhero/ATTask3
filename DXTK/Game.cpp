@@ -1,8 +1,11 @@
 #include "Game.h"
+#include "TileType.h"
+#include "TileManager.h"
 #include "SimpleMath.h"
 #include "FollowCamera.h"
 #include <windows.h>
 #include <time.h>
+#include "Tile.h"
 #include "Player.h"
 #include "Sprite.h"
 #include <d3d11.h>
@@ -39,41 +42,34 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	camera = std::make_unique<FollowCamera>(0.25f * XM_PI, game_data.aspect_ratio, 1.0f,
 		10000.0f, nullptr, Vector3(0, 0, -100));
 
-	Sprite* grass = new Sprite(L"../Assets/grass.dds", _pd3dDevice);
-	Sprite* dirt = new Sprite(L"../Assets/dirt.dds", _pd3dDevice);
-	Sprite* stone = new Sprite(L"../Assets/stone.dds", _pd3dDevice);
-
-	// Player
+	tile_manager = std::make_unique<TileManager>(_pd3dDevice);
+	
 	int x = 0;
-	int y = 384;
+	int y = 0;
 	int iterator = 0;
+	TileType type = TileType::AIR;
 	for (int i = 0; i < 500; i++)
-	{
-		Sprite* sprite = nullptr;
-		if (y <= 384)
-			sprite = grass;
-		else if (y < 128+ 640)
-			sprite = dirt;
-		else
-			sprite = stone;
+	{	
+		if (y < 256)
+			type = TileType::AIR;
+		else if (y > 256 && y <= 320)
+			type = TileType::GRASS;
+		else if (y > 320 && y <= 640)
+			type = TileType::DIRT;
+		else if (y > 640)
+			type = TileType::STONE;
 
-		Player* player = new Player(sprite);
-		player->ModifyPos(Vector2(x, y));
-		tiles.push_back(player);
-		x += grass->getWidth();
+		tiles.push_back(tile_manager->createTile(type, Vector2(x, y)));
+		x += 64;
 		iterator++;
-		if (iterator == game_data.window_width / grass->getWidth())
+		if (iterator == game_data.window_width / 64)
 		{
 			iterator = 0;
 			x = 0;
-			y += grass->getHeight();
+			y +=64;
 		}
 	}
-	
 
-	// Set camera
-	//camera->SetTarget(player.get());
-	//Game Data
 	game_data.follow_camera = camera.get();
 }
 

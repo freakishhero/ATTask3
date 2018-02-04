@@ -9,8 +9,10 @@
 
 struct DrawData2D;
 struct GameData;
+class TileManager;
 class FollowCamera;
 class Player;
+class Tile;
 
 // A basic game implementation that creates a D3D11 device and
 // provides a game loop.
@@ -34,6 +36,7 @@ private:
 	GameData game_data;
 	DrawData2D draw_data;
 
-	std::vector<Player*> tiles;
+	std::unique_ptr<TileManager> tile_manager = nullptr;
+	std::vector<Tile*> tiles;
 	std::unique_ptr<FollowCamera> camera = nullptr;
 };
