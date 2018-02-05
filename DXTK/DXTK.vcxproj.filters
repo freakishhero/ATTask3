@@ -63,6 +63,9 @@
     <ClInclude Include="TileManager.h">
       <Filter>Header</Filter>
     </ClInclude>
+    <ClInclude Include="InputHandler.h">
+      <Filter>Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -100,6 +103,9 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="TileManager.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="InputHandler.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>

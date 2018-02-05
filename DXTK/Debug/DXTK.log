@@ -1,4 +1,4 @@
-﻿  Game.cpp
-c:\users\freakish hero\desktop\mems\attask3\dxtk\game.cpp(62): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+﻿  Player.cpp
+  c:\program files (x86)\windows kits\8.1\include\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
   DXTK.vcxproj -> C:\Users\Freakish Hero\Desktop\MEMS\ATTask3\Debug\DXTK.exe
   DXTK.vcxproj -> C:\Users\Freakish Hero\Desktop\MEMS\ATTask3\Debug\DXTK.pdb (Full PDB)

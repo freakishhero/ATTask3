@@ -1,0 +1,47 @@
+﻿  pch.cpp
+  Application.cpp
+Application.cpp(361): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
+  Camera.cpp
+Camera.cpp(32): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
+  FollowCamera.cpp
+FollowCamera.cpp(39): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
+  Game.cpp
+Game.cpp(108): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
+  GameObject.cpp
+GameObject.cpp(157): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
+  GameObject2D.cpp
+GameObject2D.cpp(77): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
+  InputHandler.cpp
+InputHandler.cpp(51): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
+  Main.cpp
+Main.cpp(29): error C2065: 'Application': undeclared identifier
+Main.cpp(29): error C2146: syntax error: missing ';' before identifier 'App'
+Main.cpp(29): error C2065: 'App': undeclared identifier
+Main.cpp(31): error C2065: 'App': undeclared identifier
+Main.cpp(31): error C2228: left of '.InitWindow' must have class/struct/union
+  Main.cpp(31): note: type is 'unknown-type'
+Main.cpp(34): error C2065: 'App': undeclared identifier
+Main.cpp(34): error C2228: left of '.InitDevice' must have class/struct/union
+  Main.cpp(34): note: type is 'unknown-type'
+Main.cpp(36): error C2065: 'App': undeclared identifier
+Main.cpp(36): error C2228: left of '.CleanupDevice' must have class/struct/union
+  Main.cpp(36): note: type is 'unknown-type'
+Main.cpp(52): error C2065: 'App': undeclared identifier
+Main.cpp(52): error C2228: left of '.Update' must have class/struct/union
+  Main.cpp(52): note: type is 'unknown-type'
+Main.cpp(54): error C2065: 'App': undeclared identifier
+Main.cpp(54): error C2228: left of '.Render' must have class/struct/union
+  Main.cpp(54): note: type is 'unknown-type'
+Main.cpp(63): error C2065: 'App': undeclared identifier
+Main.cpp(63): error C2228: left of '.CleanupDevice' must have class/struct/union
+  Main.cpp(63): note: type is 'unknown-type'
+  Player.cpp
+Player.cpp(48): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
+  Sprite.cpp
+Sprite.cpp(45): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
+  SpriteGameObject.cpp
+SpriteGameObject.cpp(80): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
+  Tile.cpp
+Tile.cpp(26): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
+  TileManager.cpp
+TileManager.cpp(39): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?

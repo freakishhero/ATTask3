@@ -10,6 +10,7 @@
 struct DrawData2D;
 struct GameData;
 class TileManager;
+class InputHandler;
 class FollowCamera;
 class Player;
 class Tile;
@@ -36,7 +37,11 @@ private:
 	GameData game_data;
 	DrawData2D draw_data;
 
+	std::unique_ptr<Player> player = nullptr;
+
 	std::unique_ptr<TileManager> tile_manager = nullptr;
-	std::vector<Tile*> tiles;
+	std::unique_ptr<InputHandler> input_handler = nullptr;
 	std::unique_ptr<FollowCamera> camera = nullptr;
+
+	std::vector<Tile*> tiles;
 };
