@@ -36,15 +36,15 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	// Seed the random number generator.
 	srand(static_cast<unsigned int>(time(nullptr)));
 
-	// Camera that follows an object.
-	camera = std::make_unique<FollowCamera>(0.25f * XM_PI, game_data.aspect_ratio, 1.0f,
-		10000.0f, nullptr, Vector3(0, 0, -100));
-
 	tile_manager = std::make_unique<TileManager>(_pd3dDevice);
 	
 	Sprite* sprite = new Sprite(L"../Assets/Player.dds", _pd3dDevice);
 	player = std::make_unique<Player>(sprite);
 	
+	// Camera that follows an object.
+	camera = std::make_unique<FollowCamera>(0.25f * XM_PI, game_data.aspect_ratio, 1.0f,
+		10000.0f, player.get(), Vector3(0, 0, -100));
+
 	int x = 0;
 	int y = 0;
 	int iterator = 0;

@@ -171,6 +171,7 @@
     <ClInclude Include="SpriteGameObject.h" />
     <ClInclude Include="StepTimer.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="TileEditor.h" />
     <ClInclude Include="TileManager.h" />
     <ClInclude Include="TileType.h" />
   </ItemGroup>
@@ -218,6 +219,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Tile.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TileEditor.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TileManager.cpp">

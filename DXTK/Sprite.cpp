@@ -3,12 +3,12 @@
 
 Sprite::Sprite(const wchar_t* _file_name, ID3D11Device* _d3d_device)
 {
-	HRESULT hr = DirectX::CreateDDSTextureFromFile(_d3d_device, _file_name, nullptr, &sprite_rv);
+	HRESULT hr = DirectX::CreateDDSTextureFromFile(_d3d_device, _file_name, nullptr, &sprite_resource_view);
 
 	// Find size of image.
 	ID3D11Resource *pResource;
-	sprite_rv->GetResource(&pResource);
-	static_cast<ID3D11Texture2D*>(pResource)->GetDesc(&desc);
+	sprite_resource_view->GetResource(&pResource);
+	static_cast<ID3D11Texture2D*>(pResource)->GetDesc(&description);
 }
 
 
@@ -16,10 +16,10 @@ Sprite::Sprite(const wchar_t* _file_name, ID3D11Device* _d3d_device)
 */
 Sprite::~Sprite()
 {
-	if (sprite_rv)
+	if (sprite_resource_view)
 	{
-		sprite_rv->Release();
-		sprite_rv = nullptr;
+		sprite_resource_view->Release();
+		sprite_resource_view = nullptr;
 	}
 }
 
@@ -28,17 +28,17 @@ Sprite::~Sprite()
 */
 ID3D11ShaderResourceView* Sprite::getResourceView() const
 {
-	return sprite_rv;
+	return sprite_resource_view;
 }
 
 
 int Sprite::getWidth() const
 {
-	return desc.Width;
+	return description.Width;
 }
 
 
 int Sprite::getHeight() const
 {
-	return desc.Height;
+	return description.Height;
 }

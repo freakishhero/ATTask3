@@ -4,5 +4,6 @@ enum PlayerState
 {
 	PS_GROUNDED,
 	PS_CLIMBING,
-	PS_AIRBORNE
+	PS_JUMPING,
+	PS_EDIT
 };

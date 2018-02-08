@@ -1,47 +1,147 @@
-﻿  pch.cpp
-  Application.cpp
-Application.cpp(361): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
-  Camera.cpp
-Camera.cpp(32): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
-  FollowCamera.cpp
-FollowCamera.cpp(39): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
-  Game.cpp
-Game.cpp(108): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
-  GameObject.cpp
-GameObject.cpp(157): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
-  GameObject2D.cpp
-GameObject2D.cpp(77): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
-  InputHandler.cpp
-InputHandler.cpp(51): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
-  Main.cpp
-Main.cpp(29): error C2065: 'Application': undeclared identifier
-Main.cpp(29): error C2146: syntax error: missing ';' before identifier 'App'
-Main.cpp(29): error C2065: 'App': undeclared identifier
-Main.cpp(31): error C2065: 'App': undeclared identifier
-Main.cpp(31): error C2228: left of '.InitWindow' must have class/struct/union
-  Main.cpp(31): note: type is 'unknown-type'
-Main.cpp(34): error C2065: 'App': undeclared identifier
-Main.cpp(34): error C2228: left of '.InitDevice' must have class/struct/union
-  Main.cpp(34): note: type is 'unknown-type'
-Main.cpp(36): error C2065: 'App': undeclared identifier
-Main.cpp(36): error C2228: left of '.CleanupDevice' must have class/struct/union
-  Main.cpp(36): note: type is 'unknown-type'
-Main.cpp(52): error C2065: 'App': undeclared identifier
-Main.cpp(52): error C2228: left of '.Update' must have class/struct/union
-  Main.cpp(52): note: type is 'unknown-type'
-Main.cpp(54): error C2065: 'App': undeclared identifier
-Main.cpp(54): error C2228: left of '.Render' must have class/struct/union
-  Main.cpp(54): note: type is 'unknown-type'
-Main.cpp(63): error C2065: 'App': undeclared identifier
-Main.cpp(63): error C2228: left of '.CleanupDevice' must have class/struct/union
-  Main.cpp(63): note: type is 'unknown-type'
-  Player.cpp
-Player.cpp(48): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
-  Sprite.cpp
-Sprite.cpp(45): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
-  SpriteGameObject.cpp
-SpriteGameObject.cpp(80): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
-  Tile.cpp
-Tile.cpp(26): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
-  TileManager.cpp
-TileManager.cpp(39): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
+﻿Build started 06/02/2018 18:55:17.
+     1>Project "D:\ATTask3\DXTK\DXTK.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\amd64\CL.exe /c /ID:\ATTask3\packages\directxtk_desktop_2015.2017.12.13.1\build\native\../..//build/native/include/ /Zi /nologo /W3 /WX- /O2 /Oi /GL /D HAS_DIRECTXTK /D WIN32 /D NDEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:fast /Zc:wchar_t /Zc:forScope /Zc:inline /Yc"pch.h" /Fp"x64\Release\DXTK.pch" /Fo"x64\Release\\" /Fd"x64\Release\vc140.pdb" /Gd /TP /errorReport:prompt pch.cpp
+         pch.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\amd64\CL.exe /c /ID:\ATTask3\packages\directxtk_desktop_2015.2017.12.13.1\build\native\../..//build/native/include/ /Zi /nologo /W3 /WX- /O2 /Oi /GL /D HAS_DIRECTXTK /D WIN32 /D NDEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:fast /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"x64\Release\\" /Fd"x64\Release\vc140.pdb" /Gd /TP /errorReport:prompt Application.cpp
+         Application.cpp
+     1>d:\attask3\dxtk\Application.h(8): warning C4005: '_WIN32_WINNT': macro redefinition
+         C:\Program Files (x86)\Windows Kits\8.1\Include\shared\sdkddkver.h(200): note: see previous definition of '_WIN32_WINNT'
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\amd64\CL.exe /c /ID:\ATTask3\packages\directxtk_desktop_2015.2017.12.13.1\build\native\../..//build/native/include/ /Zi /nologo /W3 /WX- /O2 /Oi /GL /D HAS_DIRECTXTK /D WIN32 /D NDEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:fast /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"pch.h" /Fp"x64\Release\DXTK.pch" /Fo"x64\Release\\" /Fd"x64\Release\vc140.pdb" /Gd /TP /errorReport:prompt Camera.cpp FollowCamera.cpp Game.cpp GameObject.cpp GameObject2D.cpp InputHandler.cpp Main.cpp Player.cpp Sprite.cpp SpriteGameObject.cpp Tile.cpp TileManager.cpp
+         Camera.cpp
+     1>Camera.cpp(1): warning C4627: '#include "Camera.h"': skipped when looking for precompiled header use
+         Camera.cpp(1): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>Camera.cpp(2): warning C4627: '#include "GameData.h"': skipped when looking for precompiled header use
+         Camera.cpp(2): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>Camera.cpp(32): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
+         FollowCamera.cpp
+     1>FollowCamera.cpp(1): warning C4627: '#include "FollowCamera.h"': skipped when looking for precompiled header use
+         FollowCamera.cpp(1): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>FollowCamera.cpp(2): warning C4627: '#include "GameObject2D.h"': skipped when looking for precompiled header use
+         FollowCamera.cpp(2): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>FollowCamera.cpp(3): warning C4627: '#include "GameData.h"': skipped when looking for precompiled header use
+         FollowCamera.cpp(3): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>FollowCamera.cpp(39): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
+         Game.cpp
+     1>Game.cpp(1): warning C4627: '#include "Game.h"': skipped when looking for precompiled header use
+         Game.cpp(1): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>Game.cpp(2): warning C4627: '#include "TileType.h"': skipped when looking for precompiled header use
+         Game.cpp(2): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>Game.cpp(3): warning C4627: '#include "TileManager.h"': skipped when looking for precompiled header use
+         Game.cpp(3): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>Game.cpp(4): warning C4627: '#include "InputHandler.h"': skipped when looking for precompiled header use
+         Game.cpp(4): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>Game.cpp(5): warning C4627: '#include "SimpleMath.h"': skipped when looking for precompiled header use
+         Game.cpp(5): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>Game.cpp(6): warning C4627: '#include "FollowCamera.h"': skipped when looking for precompiled header use
+         Game.cpp(6): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>Game.cpp(8): warning C4627: '#include <time.h>': skipped when looking for precompiled header use
+         Game.cpp(8): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>Game.cpp(9): warning C4627: '#include "Tile.h"': skipped when looking for precompiled header use
+         Game.cpp(9): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>Game.cpp(10): warning C4627: '#include "Player.h"': skipped when looking for precompiled header use
+         Game.cpp(10): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>Game.cpp(11): warning C4627: '#include "Sprite.h"': skipped when looking for precompiled header use
+         Game.cpp(11): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>Game.cpp(12): warning C4627: '#include <d3d11.h>': skipped when looking for precompiled header use
+         Game.cpp(12): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>Game.cpp(120): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
+         GameObject.cpp
+     1>GameObject.cpp(1): warning C4627: '#include "GameObject.h"': skipped when looking for precompiled header use
+         GameObject.cpp(1): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>GameObject.cpp(2): warning C4627: '#include "GameData.h"': skipped when looking for precompiled header use
+         GameObject.cpp(2): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>GameObject.cpp(157): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
+         GameObject2D.cpp
+     1>GameObject2D.cpp(1): warning C4627: '#include "GameObject2D.h"': skipped when looking for precompiled header use
+         GameObject2D.cpp(1): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>GameObject2D.cpp(77): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
+         InputHandler.cpp
+     1>InputHandler.cpp(1): warning C4627: '#include "InputHandler.h"': skipped when looking for precompiled header use
+         InputHandler.cpp(1): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>InputHandler.cpp(2): warning C4627: '#include "CommonStates.h"': skipped when looking for precompiled header use
+         InputHandler.cpp(2): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>InputHandler.cpp(4): warning C4627: '#include "GameData.h"': skipped when looking for precompiled header use
+         InputHandler.cpp(4): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>InputHandler.cpp(49): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
+         Main.cpp
+     1>Main.cpp(1): warning C4627: '#include "Application.h"': skipped when looking for precompiled header use
+         Main.cpp(1): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>Main.cpp(29): error C2065: 'Application': undeclared identifier
+     1>Main.cpp(29): error C2146: syntax error: missing ';' before identifier 'App'
+     1>Main.cpp(29): error C2065: 'App': undeclared identifier
+     1>Main.cpp(31): error C2065: 'App': undeclared identifier
+     1>Main.cpp(31): error C2228: left of '.InitWindow' must have class/struct/union
+         Main.cpp(31): note: type is 'unknown-type'
+     1>Main.cpp(34): error C2065: 'App': undeclared identifier
+     1>Main.cpp(34): error C2228: left of '.InitDevice' must have class/struct/union
+         Main.cpp(34): note: type is 'unknown-type'
+     1>Main.cpp(36): error C2065: 'App': undeclared identifier
+     1>Main.cpp(36): error C2228: left of '.CleanupDevice' must have class/struct/union
+         Main.cpp(36): note: type is 'unknown-type'
+     1>Main.cpp(52): error C2065: 'App': undeclared identifier
+     1>Main.cpp(52): error C2228: left of '.Update' must have class/struct/union
+         Main.cpp(52): note: type is 'unknown-type'
+     1>Main.cpp(54): error C2065: 'App': undeclared identifier
+     1>Main.cpp(54): error C2228: left of '.Render' must have class/struct/union
+         Main.cpp(54): note: type is 'unknown-type'
+     1>Main.cpp(63): error C2065: 'App': undeclared identifier
+     1>Main.cpp(63): error C2228: left of '.CleanupDevice' must have class/struct/union
+         Main.cpp(63): note: type is 'unknown-type'
+         Player.cpp
+     1>Player.cpp(1): warning C4627: '#include "Player.h"': skipped when looking for precompiled header use
+         Player.cpp(1): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>Player.cpp(2): warning C4627: '#include "DrawData2D.h"': skipped when looking for precompiled header use
+         Player.cpp(2): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>Player.cpp(3): warning C4627: '#include "GameData.h"': skipped when looking for precompiled header use
+         Player.cpp(3): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>Player.cpp(4): warning C4627: '#include "Sprite.h"': skipped when looking for precompiled header use
+         Player.cpp(4): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>Player.cpp(5): warning C4627: '#include "SpriteGameObject.h"': skipped when looking for precompiled header use
+         Player.cpp(5): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>Player.cpp(6): warning C4627: '#include <dinput.h>': skipped when looking for precompiled header use
+         Player.cpp(6): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>Player.cpp(66): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
+         Sprite.cpp
+     1>Sprite.cpp(1): warning C4627: '#include "Sprite.h"': skipped when looking for precompiled header use
+         Sprite.cpp(1): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>Sprite.cpp(2): warning C4627: '#include <DDSTextureLoader.h>': skipped when looking for precompiled header use
+         Sprite.cpp(2): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>Sprite.cpp(45): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
+         SpriteGameObject.cpp
+     1>SpriteGameObject.cpp(1): warning C4627: '#include "SpriteGameObject.h"': skipped when looking for precompiled header use
+         SpriteGameObject.cpp(1): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>SpriteGameObject.cpp(2): warning C4627: '#include "DrawData2D.h"': skipped when looking for precompiled header use
+         SpriteGameObject.cpp(2): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>SpriteGameObject.cpp(3): warning C4627: '#include "GameData.h"': skipped when looking for precompiled header use
+         SpriteGameObject.cpp(3): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>SpriteGameObject.cpp(4): warning C4627: '#include "Sprite.h"': skipped when looking for precompiled header use
+         SpriteGameObject.cpp(4): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>SpriteGameObject.cpp(80): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
+         Tile.cpp
+     1>Tile.cpp(1): warning C4627: '#include "Tile.h"': skipped when looking for precompiled header use
+         Tile.cpp(1): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>Tile.cpp(2): warning C4627: '#include "DrawData2D.h"': skipped when looking for precompiled header use
+         Tile.cpp(2): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>Tile.cpp(3): warning C4627: '#include "GameData.h"': skipped when looking for precompiled header use
+         Tile.cpp(3): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>Tile.cpp(4): warning C4627: '#include "Sprite.h"': skipped when looking for precompiled header use
+         Tile.cpp(4): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>Tile.cpp(5): warning C4627: '#include "SpriteGameObject.h"': skipped when looking for precompiled header use
+         Tile.cpp(5): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>Tile.cpp(26): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
+         TileManager.cpp
+     1>TileManager.cpp(1): warning C4627: '#include "TileManager.h"': skipped when looking for precompiled header use
+         TileManager.cpp(1): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>TileManager.cpp(2): warning C4627: '#include "TileType.h"': skipped when looking for precompiled header use
+         TileManager.cpp(2): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>TileManager.cpp(3): warning C4627: '#include "Tile.h"': skipped when looking for precompiled header use
+         TileManager.cpp(3): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>TileManager.cpp(4): warning C4627: '#include "Sprite.h"': skipped when looking for precompiled header use
+         TileManager.cpp(4): note: Add directive to 'pch.h' or rebuild precompiled header
+     1>TileManager.cpp(39): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
+     1>Done Building Project "D:\ATTask3\DXTK\DXTK.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:01.61

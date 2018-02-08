@@ -12,7 +12,7 @@ public:
 	int getHeight() const;
 
 private:
-	ID3D11ShaderResourceView* sprite_rv;
-	D3D11_TEXTURE2D_DESC desc;
+	ID3D11ShaderResourceView* sprite_resource_view;
+	D3D11_TEXTURE2D_DESC description;
 
 };

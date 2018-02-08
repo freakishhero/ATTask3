@@ -1,6 +1,9 @@
 #pragma once
 #include "SpriteGameObject.h"
 
+enum PlayerState;
+class TileEditor;
+
 class Player : public SpriteGameObject
 {
 public:
@@ -12,9 +15,13 @@ public:
 
 	bool IsVisible() const override;
 	void SetVisible(bool _visible) override;
+	void SetEditMode(bool _state);
 
 private:
+	PlayerState player_state;
+	TileEditor* tile_editor;
 	float move_speed;
 	float jump_height;
 	bool visible;
+	bool edit_mode = false;
 };
