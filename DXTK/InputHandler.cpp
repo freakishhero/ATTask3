@@ -3,7 +3,7 @@
 #include <windows.h>
 #include "GameData.h"
 
-InputHandler::InputHandler(GameData* _GD, HWND _hWnd, HINSTANCE _hInstance)
+InputHandler::InputHandler(GameData* _GD, HWND& _hWnd, HINSTANCE& _hInstance)
 {
 	keyboard = nullptr;
 	direct_input = nullptr;
@@ -19,21 +19,26 @@ InputHandler::InputHandler(GameData* _GD, HWND _hWnd, HINSTANCE _hInstance)
  
 InputHandler::~InputHandler()
 {
+	if (keyboard)
+	{
+		keyboard->Unacquire();
+		keyboard->Release();
+	}
+}
+
+void InputHandler::Tick()
+{
+	ReadInput();
 }
 
 bool InputHandler::ReadInput()
 {
-	//copy over old keyboard state
 	memcpy(last_keyboard_state, keyboard_state, sizeof(unsigned char) * 256);
-
-	//clear out previous state
-	ZeroMemory(&keyboard_state, sizeof(unsigned char) * 256);
-
-	// Read the keyboard device.
+	ZeroMemory(&keyboard_state, sizeof(keyboard_state));
 	HRESULT hr = keyboard->GetDeviceState(sizeof(keyboard_state), (LPVOID)&keyboard_state);
+
 	if (FAILED(hr))
 	{
-		// If the keyboard lost focus or was not acquired then try to get control back.
 		if ((hr == DIERR_INPUTLOST) || (hr == DIERR_NOTACQUIRED))
 		{
 			keyboard->Acquire();
@@ -43,6 +48,5 @@ bool InputHandler::ReadInput()
 			return false;
 		}
 	}
-
 	return true;
 }

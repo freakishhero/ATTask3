@@ -1,11 +1,12 @@
 #include "TileEditor.h"
 #include "DrawData2D.h"
+#include "Tile.h"
 #include "Sprite.h"
 #include "SpriteGameObject.h"
 
-TileEditor::TileEditor(int _tileSize)
+TileEditor::TileEditor(Sprite* _sprite)
 {
-	tileSize = _tileSize;
+	sprite = _sprite;
 }
 
 TileEditor::~TileEditor()
@@ -14,6 +15,11 @@ TileEditor::~TileEditor()
 
 void TileEditor::Tick(GameData * _GD)
 {
+	if (selected_tile != nullptr)
+	{
+		pos = selected_tile->GetPos();
+	}
+	
 	SpriteGameObject::Tick(_GD);
 }
 
@@ -33,4 +39,14 @@ bool TileEditor::IsVisible() const
 void TileEditor::SetVisible(bool _visible)
 {
 	visible = _visible;
+}
+
+void TileEditor::SetSelectedTile(Tile * _tile)
+{
+	selected_tile = _tile;
+}
+
+Tile * TileEditor::GetSelectedTile() const
+{
+	return selected_tile;
 }

@@ -15,7 +15,10 @@ public:
 
 	bool IsVisible() const override;
 	void SetVisible(bool _visible) override;
-	void SetEditMode(bool _state);
+	void SetTileEditor(TileEditor*);
+	TileEditor* GetTileEditor();
+	void EnableEditMode();
+	void DisableEditMode();
 
 private:
 	PlayerState player_state;
@@ -23,5 +26,4 @@ private:
 	float move_speed;
 	float jump_height;
 	bool visible;
-	bool edit_mode = false;
 };

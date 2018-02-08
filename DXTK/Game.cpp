@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "TileType.h"
 #include "TileManager.h"
+#include "TileEditor.h"
 #include "InputHandler.h"
 #include "SimpleMath.h"
 #include "FollowCamera.h"
@@ -38,9 +39,6 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 
 	tile_manager = std::make_unique<TileManager>(_pd3dDevice);
 	
-	Sprite* sprite = new Sprite(L"../Assets/Player.dds", _pd3dDevice);
-	player = std::make_unique<Player>(sprite);
-	
 	// Camera that follows an object.
 	camera = std::make_unique<FollowCamera>(0.25f * XM_PI, game_data.aspect_ratio, 1.0f,
 		10000.0f, player.get(), Vector3(0, 0, -100));
@@ -59,8 +57,7 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 			type = TileType::DIRT;
 		else if (y > 640)
 			type = TileType::STONE;
-
-		tiles.push_back(tile_manager->createTile(type, Vector2(x, y)));
+		tiles.push_back(tile_manager->createTile(i, type, Vector2(x, y)));
 		x += 64;
 		iterator++;
 		if (iterator == game_data.window_width / 64)
@@ -71,6 +68,12 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 		}
 	}
 
+	game_data.tiles = tiles;
+	Sprite* sprite = new Sprite(L"../Assets/Player.dds", _pd3dDevice);
+	player = std::make_unique<Player>(sprite);
+	Sprite* sprite1 = new Sprite(L"../Assets/Selection.dds", _pd3dDevice);
+	player->SetTileEditor(new TileEditor(sprite1));
+	player->DisableEditMode();
 	game_data.follow_camera = camera.get();
 }
 
@@ -82,22 +85,17 @@ Game::~Game()
 // Executes the basic game loop.
 bool Game::Tick()
 {
-	input_handler->ReadInput();
-
 	DWORD currentTime = GetTickCount();
 	game_data.delta_time = min((float)(currentTime - play_time) / 1000.0f, 0.1f);
 	play_time = currentTime;
+
+	input_handler->Tick();
 
 	for (auto& tile : tiles)
 	{
 		tile->Tick(&game_data);
 	}
 	player->Tick(&game_data);
-
-	if (game_data.keyboard_state[DIK_ESCAPE] & 0x80)
-	{
-		game_data.exit = true;
-	}
 
 	if (game_data.exit == true)
 	{

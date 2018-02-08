@@ -12,8 +12,6 @@ Player::Player(Sprite* _sprite)
 {
 	player_state = PlayerState::PS_GROUNDED;
 	sprite = _sprite;
-	tile_editor = new TileEditor(64);
-	edit_mode = false;
 }
 
 
@@ -29,6 +27,11 @@ Player::~Player()
 
 void Player::Tick(GameData* _GD)
 {
+	if (_GD->keyboard_state[DIK_ESCAPE] & 0x80)
+	{
+		_GD->exit = true;
+	}
+
 	if (player_state != PlayerState::PS_EDIT)
 	{
 		if (_GD->keyboard_state[DIK_W] & 0x80)
@@ -47,35 +50,47 @@ void Player::Tick(GameData* _GD)
 		{
 			pos += Vector2(100, 0) * _GD->delta_time;
 		}
-		if (_GD->keyboard_state[DIK_0] & 0x80)
+		if (_GD->keyboard_state[DIK_1] & 0x80)
 		{
-			SetEditMode(true);
+			EnableEditMode();
 		}
 	}
 	else 
 	{
+		if (tile_editor->GetSelectedTile() == nullptr)
+		{
+			tile_editor->SetSelectedTile(_GD->tiles[0]);
+		}
+
 		if (_GD->keyboard_state[DIK_W] & 0x80)
 		{
-			tile_editor->ModifyPos(Vector2(0, -64) * _GD->delta_time);
+
 		}
 		if (_GD->keyboard_state[DIK_S] & 0x80)
 		{
-			tile_editor->ModifyPos(Vector2(0, 64) * _GD->delta_time);
+
 		}
 		if (_GD->keyboard_state[DIK_A] & 0x80)
 		{
-			tile_editor->ModifyPos(Vector2(-64, 0) * _GD->delta_time);
+			tile_editor->SetSelectedTile(_GD->tiles[tile_editor->GetSelectedTile()->GetID() - 1]);
 		}
 		if (_GD->keyboard_state[DIK_D] & 0x80)
 		{
-			pos += Vector2(64, 0) * _GD->delta_time;
+			tile_editor->SetSelectedTile(_GD->tiles[tile_editor->GetSelectedTile()->GetID() + 1]);
 		}
-		if (_GD->keyboard_state[DIK_0] & 0x80)
+		if (_GD->keyboard_state[DIK_SPACE] & 0x80)
 		{
-			SetEditMode(false);
+			tile_editor->GetSelectedTile()->SetVisible(false);
 		}
+		if (_GD->keyboard_state[DIK_2] & 0x80)
+		{
+			DisableEditMode();
+		}
+
+		tile_editor->Tick(_GD);
 	}
 	
+
 	SpriteGameObject::Tick(_GD);
 }
 
@@ -85,6 +100,11 @@ void Player::Draw(DrawData2D* _DD)
 	if (visible)
 	{
 		_DD->sprite_batch->Draw(sprite->getResourceView(), pos, nullptr, color, rot, origin, scale, SpriteEffects_None);
+	}
+
+	if (tile_editor)
+	{
+		tile_editor->Draw(_DD);
 	}
 }
 
@@ -98,19 +118,26 @@ void Player::SetVisible(bool _visible)
 	visible = _visible;
 }
 
-void Player::SetEditMode(bool _state)
+void Player::SetTileEditor(TileEditor * _te)
 {
-	edit_mode = _state;
-	if (edit_mode)
-	{
-		player_state = PlayerState::PS_EDIT;
-		visible = false;
-		tile_editor->SetVisible(true);
-	}
-	else 
-	{
-		player_state = PlayerState::PS_GROUNDED;
-		visible = true;
-		tile_editor->SetVisible(false);
-	}
+	tile_editor = _te;
+}
+
+TileEditor * Player::GetTileEditor()
+{
+	return tile_editor;
+}
+
+void Player::EnableEditMode()
+{
+	player_state = PlayerState::PS_EDIT;
+	visible = false;
+	tile_editor->SetVisible(true);
+}
+
+void Player::DisableEditMode()
+{
+	player_state = PlayerState::PS_GROUNDED;
+	visible = true;
+	tile_editor->SetVisible(false);
 }

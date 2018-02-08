@@ -1,6 +1,8 @@
 #pragma once
 #include "PlayerStates.h"
+#include <vector>
 
+class Tile;
 class FollowCamera;
 
 struct GameData
@@ -13,6 +15,7 @@ struct GameData
 
 	PlayerState player_state = PlayerState::PS_GROUNDED; //Player state
 	FollowCamera* follow_camera = nullptr; //Global camera for the player
+	std::vector<Tile*> tiles;
 
 	unsigned char* keyboard_state; //Current state of the Keyboard
 	unsigned char* last_keyboard_state; //Last state of the keyboard
