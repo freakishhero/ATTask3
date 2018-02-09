@@ -9,12 +9,18 @@ class InputHandler
 public:
 	InputHandler(GameData* _GD, HWND& _hWnd, HINSTANCE& _hInstance);
 	~InputHandler();
-	void Tick();
-	
+	void Tick(GameData* _GD);
+
 private:
 	IDirectInput8*			direct_input;
+
 	IDirectInputDevice8*	keyboard;
 	unsigned char			keyboard_state[256];
 	unsigned char			last_keyboard_state[256];
-	bool ReadInput();
+
+	IDirectInputDevice8*	mouse;
+	DIMOUSESTATE			mouse_state;
+	
+	bool ReadKeyboard();
+	bool ReadMouse();
 };

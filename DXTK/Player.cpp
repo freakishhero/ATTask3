@@ -1,4 +1,5 @@
 #include "Player.h"
+#include <iostream>
 #include "PlayerStates.h"
 #include "TileEditor.h"
 #include "DrawData2D.h"
@@ -6,6 +7,7 @@
 #include "Sprite.h"
 #include "SpriteGameObject.h"
 #include <dinput.h>
+#include <cmath>
 
 Player::Player(Sprite* _sprite)
 	: visible(true)
@@ -57,35 +59,29 @@ void Player::Tick(GameData* _GD)
 	}
 	else 
 	{
-		if (tile_editor->GetSelectedTile() == nullptr)
-		{
-			tile_editor->SetSelectedTile(_GD->tiles[0]);
-		}
-
-		if (_GD->keyboard_state[DIK_W] & 0x80)
-		{
-
-		}
-		if (_GD->keyboard_state[DIK_S] & 0x80)
-		{
-
-		}
-		if (_GD->keyboard_state[DIK_A] & 0x80)
-		{
-			tile_editor->SetSelectedTile(_GD->tiles[tile_editor->GetSelectedTile()->GetID() - 1]);
-		}
-		if (_GD->keyboard_state[DIK_D] & 0x80)
-		{
-			tile_editor->SetSelectedTile(_GD->tiles[tile_editor->GetSelectedTile()->GetID() + 1]);
-		}
-		if (_GD->keyboard_state[DIK_SPACE] & 0x80)
-		{
-			tile_editor->GetSelectedTile()->SetVisible(false);
-		}
 		if (_GD->keyboard_state[DIK_2] & 0x80)
 		{
 			DisableEditMode();
 		}
+
+		tile_editor->SetPos(Vector2(
+			_GD->mouse_pos.x = floor(_GD->mouse_pos.x / _GD->TILE_WIDTH) * _GD->TILE_WIDTH,
+			_GD->mouse_pos.y = floor(_GD->mouse_pos.y / _GD->TILE_HEIGHT) * _GD->TILE_HEIGHT
+			));
+
+			if (_GD->mouse_state->rgbButtons[0])
+			{
+				for (auto& tile : _GD->tiles)
+				{
+					if (tile->GetPos() == Vector2(_GD->mouse_pos.x, _GD->mouse_pos.y))
+					{
+						if (tile->GetTileType() != TileType::AIR)
+							tile->DestroyTile();
+						//else
+							//tile->SetTileType(TileType::COBBLESTONE);
+					}
+				}
+			}
 
 		tile_editor->Tick(_GD);
 	}

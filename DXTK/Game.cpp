@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "GameStates.h"
 #include "TileType.h"
 #include "TileManager.h"
 #include "TileEditor.h"
@@ -43,8 +44,8 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	camera = std::make_unique<FollowCamera>(0.25f * XM_PI, game_data.aspect_ratio, 1.0f,
 		10000.0f, player.get(), Vector3(0, 0, -100));
 
-	int x = 0;
-	int y = 0;
+	float x = 0;
+	float y = 0;
 	int iterator = 0;
 	TileType type = TileType::AIR;
 	for (int i = 0; i < 500; i++)
@@ -75,6 +76,8 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	player->SetTileEditor(new TileEditor(sprite1));
 	player->DisableEditMode();
 	game_data.follow_camera = camera.get();
+	game_data.game_state = GameState::PLAY;
+
 }
 
 
@@ -89,7 +92,8 @@ bool Game::Tick()
 	game_data.delta_time = min((float)(currentTime - play_time) / 1000.0f, 0.1f);
 	play_time = currentTime;
 
-	input_handler->Tick();
+	input_handler->Tick(&game_data);
+	tile_manager->Tick(&game_data);
 
 	for (auto& tile : tiles)
 	{

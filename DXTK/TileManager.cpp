@@ -2,6 +2,7 @@
 #include "TileType.h"
 #include "Tile.h"
 #include "Sprite.h"
+#include "GameData.h"
 
 TileManager::TileManager(ID3D11Device* _d3d_device)
 {
@@ -39,4 +40,29 @@ Tile* TileManager::createTile(int _ID, TileType _type, DirectX::SimpleMath::Vect
 		break;
 	}
 	return tile;
+}
+
+void TileManager::Tick(GameData * _GD)
+{
+	for (auto& tile : _GD->tiles)
+	{
+		switch (tile->GetTileType())
+		{
+		case TileType::AIR:
+			tile->SetSprite(tileSprites[0]);
+			break;
+		case TileType::GRASS:
+			tile->SetSprite(tileSprites[1]);
+			break;
+		case TileType::DIRT:
+			tile->SetSprite(tileSprites[2]);
+			break;
+		case TileType::STONE:
+			tile->SetSprite(tileSprites[3]);
+			break;
+		case TileType::COBBLESTONE:
+			tile->SetSprite(tileSprites[4]);
+			break;
+		}
+	}
 }

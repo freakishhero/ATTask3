@@ -1,7 +1,9 @@
 #pragma once
-#include "PlayerStates.h"
 #include <vector>
+#include <dinput.h>
 
+enum GameState;
+enum PlayerState;
 class Tile;
 class FollowCamera;
 
@@ -9,14 +11,20 @@ struct GameData
 {
 	bool exit = false; //Should the main game loop should stop?
 	float delta_time = 0;  //Time passed since the last frame
-	int window_width; //Width of the window
-	int window_height; //Height of the window
-	float aspect_ratio = 0; //AspectRatio of the window.
+	int window_width = 0; //Width of the window
+	int window_height = 0; //Height of the window
 
-	PlayerState player_state = PlayerState::PS_GROUNDED; //Player state
-	FollowCamera* follow_camera = nullptr; //Global camera for the player
+	float aspect_ratio = 0; //AspectRatio of the window.
+	GameState game_state;
+	PlayerState player_state;
+	FollowCamera* follow_camera = nullptr;
 	std::vector<Tile*> tiles;
 
-	unsigned char* keyboard_state; //Current state of the Keyboard
-	unsigned char* last_keyboard_state; //Last state of the keyboard
+	unsigned char* keyboard_state = nullptr; //Current state of the Keyboard
+	unsigned char* last_keyboard_state = nullptr; //Last state of the keyboard
+	DIMOUSESTATE* mouse_state = nullptr;
+	POINT mouse_pos;
+
+	const float TILE_WIDTH = 64;
+	const float TILE_HEIGHT = 64;
 };

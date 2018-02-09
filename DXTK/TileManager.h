@@ -5,6 +5,7 @@
 
 enum class TileType;
 class Tile;
+class GameData;
 class Sprite;
 
 class TileManager
@@ -14,6 +15,7 @@ public:
 	~TileManager();
 
 	Tile* createTile(int ID, TileType _type, DirectX::SimpleMath::Vector2 _position);
+	void Tick(GameData* _GD);
 
 private:
 	std::vector<Sprite*> tileSprites;
