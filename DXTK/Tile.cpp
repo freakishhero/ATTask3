@@ -9,6 +9,9 @@ Tile::Tile(int _ID, TileType _type, Vector2 _position)
 	tile_type = _type;
 	pos = _position;
 	ID = _ID;
+
+	if (tile_type == TileType::BEDROCK)
+		destructable = false;
 }
 
 Tile::~Tile()
@@ -51,4 +54,9 @@ int Tile::GetID() const
 void Tile::SetID(int _ID)
 {
 	ID = _ID;
+}
+
+bool Tile::isDestructable()
+{
+	return destructable;
 }

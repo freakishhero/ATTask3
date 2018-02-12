@@ -15,7 +15,9 @@ public:
 	TileType GetTileType() const;
 	int GetID() const;
 	void SetID(int _ID);
+	bool isDestructable();
 private:
 	TileType tile_type;
 	int ID = 0;
+	bool destructable;
 };

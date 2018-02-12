@@ -6,5 +6,6 @@ enum class TileType
 	GRASS = 1,
 	DIRT = 2,
 	STONE = 3,
-	COBBLESTONE = 4
+	COBBLESTONE = 4,
+	BEDROCK = 20
 };

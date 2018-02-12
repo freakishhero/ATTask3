@@ -75,8 +75,12 @@ void Player::Tick(GameData* _GD)
 				{
 					if (tile->GetPos() == Vector2(_GD->mouse_pos.x, _GD->mouse_pos.y))
 					{
-						if (tile->GetTileType() != TileType::AIR)
-							tile->DestroyTile();
+						if (tile->isDestructable())
+						{
+							if (tile->GetTileType() != TileType::AIR)
+								tile->DestroyTile();
+						}
+						
 						//else
 							//tile->SetTileType(TileType::COBBLESTONE);
 					}

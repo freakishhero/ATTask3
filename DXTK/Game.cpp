@@ -11,6 +11,7 @@
 #include "Tile.h"
 #include "Player.h"
 #include "Sprite.h"
+#include "PerlinNoise.h"
 #include <d3d11.h>
 
 using namespace DirectX;
@@ -44,16 +45,22 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	camera = std::make_unique<FollowCamera>(0.25f * XM_PI, game_data.aspect_ratio, 1.0f,
 		10000.0f, player.get(), Vector3(0, 0, -100));
 
-	float x = 0;
-	float y = 0;
-	int iterator = 0;
-	TileType type = TileType::AIR;
-	for (int i = 0; i < 500; i++)
+	noise = new PerlinNoise(rand() % 1000000 + 10000000);
+	generateChunk();
+
+	/*float x = 0;
+	float y = game_data.window_height - 64;;
+	int amount = rand() % 500 + 100;
+	int iterator = 0;	
+	TileType type = TileType::BEDROCK;
+	for (int i = 0; i < amount; i++)
 	{	
+			
+
 		if (y < 256)
 			type = TileType::AIR;
 		else if (y > 256 && y <= 320)
-			type = TileType::GRASS;
+			type = TileType::BEDROCK;
 		else if (y > 320 && y <= 640)
 			type = TileType::DIRT;
 		else if (y > 640)
@@ -67,7 +74,7 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 			x = 0;
 			y +=64;
 		}
-	}
+	}*/
 
 	game_data.tiles = tiles;
 	Sprite* sprite = new Sprite(L"../Assets/Player.dds", _pd3dDevice);
@@ -116,6 +123,36 @@ void Game::Draw(ID3D11DeviceContext * _pd3dImmediateContext)
 	{
 		tile->Draw(&draw_data);
 	}
+
 	player->Draw(&draw_data);
 	draw_data.sprite_batch->End();
+}
+
+void Game::generateChunk()
+{
+	for (int i = game_data.window_width / 64; i >= 0 ; i--) //x = width 
+	{
+		int height = 2 + noise->generateNoise(i - 16, 16);
+		for (int j = height; j > 1; j--) //y = height
+		{
+			tiles.push_back(tile_manager->createTile(i, TileType::DIRT, Vector2(i * game_data.TILE_WIDTH, j  * game_data.TILE_HEIGHT)));
+		}
+	}
+
+	/*
+	for (int i = 0; i < 600; i++)
+	{
+		tiles.push_back(tile_manager->createTile(i, TileType::AIR, Vector2(0, 0)));
+	}
+
+	for (int i = game_data.window_width / 64; i >= 0 ; i--) //x - width 
+	{
+		int height = 2 + noise->generateNoise(i, 16);
+		for (int j = height; j > 1; j--) //y - height
+		{
+			tiles[i]->SetTileType(TileType::DIRT);
+			tiles[i]->SetPos(Vector2(i * game_data.TILE_WIDTH, j * game_data.TILE_HEIGHT));
+		}
+	}
+	*/
 }

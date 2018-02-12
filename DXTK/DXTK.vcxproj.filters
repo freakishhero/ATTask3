@@ -69,6 +69,9 @@
     <ClInclude Include="TileEditor.h">
       <Filter>Header</Filter>
     </ClInclude>
+    <ClInclude Include="PerlinNoise.h">
+      <Filter>Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -112,6 +115,9 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="TileEditor.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="PerlinNoise.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>

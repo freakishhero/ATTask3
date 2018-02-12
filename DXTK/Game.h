@@ -9,6 +9,7 @@
 
 struct DrawData2D;
 struct GameData;
+class PerlinNoise;
 class TileManager;
 class InputHandler;
 class FollowCamera;
@@ -31,9 +32,11 @@ private:
 	DWORD play_time; //amount of time since the game started
 	HWND        hWnd;
 
+	void generateChunk();
 	// Game Objects
 	GameData game_data;
 	DrawData2D draw_data;
+	PerlinNoise* noise;
 
 	std::unique_ptr<Player> player = nullptr;
 

@@ -11,6 +11,7 @@ TileManager::TileManager(ID3D11Device* _d3d_device)
 	tileSprites.push_back(new Sprite(L"../Assets/Dirt.dds", _d3d_device));
 	tileSprites.push_back(new Sprite(L"../Assets/Stone.dds", _d3d_device));
 	tileSprites.push_back(new Sprite(L"../Assets/CobbleStone.dds", _d3d_device));
+	tileSprites.push_back(new Sprite(L"../Assets/Bedrock.dds", _d3d_device));
 }
 
 TileManager::~TileManager()
@@ -38,6 +39,9 @@ Tile* TileManager::createTile(int _ID, TileType _type, DirectX::SimpleMath::Vect
 	case TileType::COBBLESTONE:
 		tile->SetSprite(tileSprites[4]);
 		break;
+	case TileType::BEDROCK:
+		tile->SetSprite(tileSprites[4]);
+		break;
 	}
 	return tile;
 }
@@ -62,6 +66,9 @@ void TileManager::Tick(GameData * _GD)
 			break;
 		case TileType::COBBLESTONE:
 			tile->SetSprite(tileSprites[4]);
+			break;
+		case TileType::BEDROCK:
+			tile->SetSprite(tileSprites[5]);
 			break;
 		}
 	}
