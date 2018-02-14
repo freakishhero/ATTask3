@@ -13,6 +13,7 @@ public:
 	void DestroyTile();
 	void SetTileType(TileType _type);
 	TileType GetTileType() const;
+	void SetSurfaceTile(bool _state);
 	int GetID() const;
 	void SetID(int _ID);
 	bool isDestructable();
@@ -20,4 +21,5 @@ private:
 	TileType tile_type;
 	int ID = 0;
 	bool destructable;
+	bool surface_tile;
 };

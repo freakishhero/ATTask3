@@ -18,6 +18,8 @@ TileManager::~TileManager()
 {
 }
 
+
+
 Tile* TileManager::createTile(int _ID, TileType _type, DirectX::SimpleMath::Vector2 _position)
 {
 	Tile* tile = new Tile(_ID, _type, _position);
@@ -46,8 +48,41 @@ Tile* TileManager::createTile(int _ID, TileType _type, DirectX::SimpleMath::Vect
 	return tile;
 }
 
+void TileManager::CheckSurfaceTile(Tile * _tile, GameData* _GD)
+{
+	for (auto& tile : _GD->tiles)
+	{
+		if (_tile != tile && tile->GetTileType() != TileType::AIR)
+		{
+			if (_tile->GetPos().x == tile->GetPos().x)
+			{
+				if (_tile->GetPos().y < tile->GetPos().y)
+				{
+					_tile->SetSurfaceTile(true);
+				}
+				else
+				{
+					_tile->SetSurfaceTile(false);
+				}
+			}
+		}
+	}
+}
+
 void TileManager::Tick(GameData * _GD)
 {
+	Tile* surface_tile;
+
+	for (auto& tile : _GD->tiles)
+	{
+		if (tile->GetTileType() != TileType::AIR)
+		{
+			CheckSurfaceTile(tile, _GD);
+		}
+		
+	}
+
+
 	for (auto& tile : _GD->tiles)
 	{
 		switch (tile->GetTileType())
@@ -72,4 +107,5 @@ void TileManager::Tick(GameData * _GD)
 			break;
 		}
 	}
+	
 }

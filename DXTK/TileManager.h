@@ -15,6 +15,7 @@ public:
 	~TileManager();
 
 	Tile* createTile(int ID, TileType _type, DirectX::SimpleMath::Vector2 _position);
+	void CheckSurfaceTile(Tile* _tile, GameData* _GD);
 	void Tick(GameData* _GD);
 
 private:

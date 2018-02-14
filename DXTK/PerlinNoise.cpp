@@ -12,7 +12,7 @@ PerlinNoise::~PerlinNoise()
 
 int PerlinNoise::generateNoise(int _x, int _range)
 {
-	int chunk_size = 16;
+	int chunk_size = 8;
 	float noise = 0;
 
 	while (chunk_size > 0 && _range > 0)
@@ -23,7 +23,7 @@ int PerlinNoise::generateNoise(int _x, int _range)
 		float left_random = random(chunk_index, _range);
 		float right_random = random(chunk_index + 1, _range);
 
-		noise + = (1 - prog) * left_random + prog * right_random;
+		noise += (1 - prog) * left_random + prog * right_random;
 
 		chunk_size /= 2;
 		_range /= 2;

@@ -8,7 +8,6 @@ public:
 
 	int generateNoise(int _x, int _range);
 
-
 private:
 	int random(int _x, int _range);
 	long seed;

@@ -130,12 +130,13 @@ void Game::Draw(ID3D11DeviceContext * _pd3dImmediateContext)
 
 void Game::generateChunk()
 {
-	for (int i = game_data.window_width / 64; i >= 0 ; i--) //x = width 
+	for (int i = 0; i < game_data.window_width / game_data.TILE_WIDTH; i++) //x = width 
 	{
-		int height = 2 + noise->generateNoise(i - 16, 16);
-		for (int j = height; j > 1; j--) //y = height
+		int height = noise->generateNoise(i, game_data.TILE_HEIGHT / 6);
+
+		for (int j = game_data.window_height / game_data.TILE_HEIGHT; j > game_data.window_height / game_data.TILE_HEIGHT - height; j--) //y = height
 		{
-			tiles.push_back(tile_manager->createTile(i, TileType::DIRT, Vector2(i * game_data.TILE_WIDTH, j  * game_data.TILE_HEIGHT)));
+			tiles.push_back(tile_manager->createTile(i, TileType::DIRT , Vector2(i * game_data.TILE_WIDTH, j  * game_data.TILE_HEIGHT)));
 		}
 	}
 

@@ -20,6 +20,10 @@ Tile::~Tile()
 
 void Tile::Tick(GameData * _GD)
 {
+	if (surface_tile && tile_type == TileType::DIRT)
+	{
+		tile_type = TileType::GRASS;
+	}
 	SpriteGameObject::Tick(_GD);
 }
 
@@ -44,6 +48,11 @@ void Tile::SetTileType(TileType _type)
 TileType Tile::GetTileType() const
 {
 	return tile_type;
+}
+
+void Tile::SetSurfaceTile(bool _state)
+{
+	surface_tile = _state;
 }
 
 int Tile::GetID() const
