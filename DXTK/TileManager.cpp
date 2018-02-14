@@ -3,48 +3,28 @@
 #include "Tile.h"
 #include "Sprite.h"
 #include "GameData.h"
+#include <string>
 
-TileManager::TileManager(ID3D11Device* _d3d_device)
+TileManager::TileManager(GameData* _GD, ID3D11Device* _d3d_device)
 {
-	tileSprites.push_back(new Sprite(L"../Assets/Air.dds", _d3d_device));
-	tileSprites.push_back(new Sprite(L"../Assets/Grass.dds", _d3d_device));
-	tileSprites.push_back(new Sprite(L"../Assets/Dirt.dds", _d3d_device));
-	tileSprites.push_back(new Sprite(L"../Assets/Stone.dds", _d3d_device));
-	tileSprites.push_back(new Sprite(L"../Assets/CobbleStone.dds", _d3d_device));
-	tileSprites.push_back(new Sprite(L"../Assets/Bedrock.dds", _d3d_device));
+	for (int i = 0; i < _GD->TILE_SPRITES; i++)
+	{
+		std::string id = std::to_string(i);
+		std::string file_path = "../Assets/" + id + ".dds";
+		const char* c_string = file_path.c_str();
+		tileSprites.push_back(new Sprite(charToWChar(c_string), _d3d_device));
+	}
 }
 
 TileManager::~TileManager()
 {
 }
 
-
-
 Tile* TileManager::createTile(int _ID, TileType _type, DirectX::SimpleMath::Vector2 _position)
 {
 	Tile* tile = new Tile(_ID, _type, _position);
+	tile->SetSprite(tileSprites[(int)_type]);
 
-	switch (_type)
-	{
-	case TileType::AIR:
-		tile->SetSprite(tileSprites[0]);
-			break;
-	case TileType::GRASS:
-		tile->SetSprite(tileSprites[1]);
-		break;
-	case TileType::DIRT:
-		tile->SetSprite(tileSprites[2]);
-		break;
-	case TileType::STONE:
-		tile->SetSprite(tileSprites[3]);
-		break;
-	case TileType::COBBLESTONE:
-		tile->SetSprite(tileSprites[4]);
-		break;
-	case TileType::BEDROCK:
-		tile->SetSprite(tileSprites[4]);
-		break;
-	}
 	return tile;
 }
 
@@ -69,6 +49,23 @@ void TileManager::CheckSurfaceTile(Tile * _tile, GameData* _GD)
 	}
 }
 
+wchar_t * TileManager::charToWChar(const char * _string)
+{
+	size_t size = strlen(_string) + 1;
+	static wchar_t* wa = NULL;
+
+	if (wa)
+	{
+		delete[] wa;
+		wa = NULL;
+	}
+
+	wa = new wchar_t[size];
+	mbstowcs_s(nullptr, wa, size, _string, size);
+
+	return wa;
+}
+
 void TileManager::Tick(GameData * _GD)
 {
 	Tile* surface_tile;
@@ -82,30 +79,9 @@ void TileManager::Tick(GameData * _GD)
 		
 	}
 
-
 	for (auto& tile : _GD->tiles)
 	{
-		switch (tile->GetTileType())
-		{
-		case TileType::AIR:
-			tile->SetSprite(tileSprites[0]);
-			break;
-		case TileType::GRASS:
-			tile->SetSprite(tileSprites[1]);
-			break;
-		case TileType::DIRT:
-			tile->SetSprite(tileSprites[2]);
-			break;
-		case TileType::STONE:
-			tile->SetSprite(tileSprites[3]);
-			break;
-		case TileType::COBBLESTONE:
-			tile->SetSprite(tileSprites[4]);
-			break;
-		case TileType::BEDROCK:
-			tile->SetSprite(tileSprites[5]);
-			break;
-		}
+		tile->SetSprite(tileSprites[(int)tile->GetTileType()]);
 	}
 	
 }

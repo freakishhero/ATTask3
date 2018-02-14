@@ -25,6 +25,7 @@ struct GameData
 	DIMOUSESTATE* mouse_state = nullptr;
 	POINT mouse_pos;
 
+	const int TILE_SPRITES = 6;
 	const float TILE_WIDTH = 64;
 	const float TILE_HEIGHT = 64;
 };

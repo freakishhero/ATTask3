@@ -39,7 +39,7 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	// Seed the random number generator.
 	srand(static_cast<unsigned int>(time(nullptr)));
 
-	tile_manager = std::make_unique<TileManager>(_pd3dDevice);
+	tile_manager = std::make_unique<TileManager>(&game_data, _pd3dDevice);
 	
 	// Camera that follows an object.
 	camera = std::make_unique<FollowCamera>(0.25f * XM_PI, game_data.aspect_ratio, 1.0f,
@@ -132,12 +132,15 @@ void Game::generateChunk()
 {
 	for (int i = 0; i < game_data.window_width / game_data.TILE_WIDTH; i++) //x = width 
 	{
-		int height = noise->generateNoise(i, game_data.TILE_HEIGHT / 6);
+		int height = 2 + noise->generateNoise(i, game_data.TILE_HEIGHT / 6);
 
 		for (int j = game_data.window_height / game_data.TILE_HEIGHT; j > game_data.window_height / game_data.TILE_HEIGHT - height; j--) //y = height
 		{
 			tiles.push_back(tile_manager->createTile(i, TileType::DIRT , Vector2(i * game_data.TILE_WIDTH, j  * game_data.TILE_HEIGHT)));
 		}
+
+		//TO DO - FILL REST OF TILES WITH AIR
+		//ADD STONE GENERATION AND BEDROCK TO THE BOTTOM
 	}
 
 	/*
