@@ -87,6 +87,23 @@ void Player::Tick(GameData* _GD)
 				}
 			}
 
+			if (_GD->mouse_state->rgbButtons[0] && _GD->keyboard_state[DIK_LSHIFT] & 0x80)
+			{
+				for (auto& tile : _GD->tiles)
+				{
+					if (tile->GetPos() == Vector2(_GD->mouse_pos.x, _GD->mouse_pos.y))
+					{
+						if (tile->GetTileType() == TileType::AIR)
+						{
+								tile->SetTileType(TileType::COBBLESTONE);
+						}
+
+						//else
+						//tile->SetTileType(TileType::COBBLESTONE);
+					}
+				}
+			}
+
 		tile_editor->Tick(_GD);
 	}
 	
