@@ -9,32 +9,32 @@ CollisionComponent::CollisionComponent(Vector2 _position, float _top, float _bot
 	pos = _position;
 }
 
-Vector2 CollisionComponent::getPos()
+Vector2 CollisionComponent::GetPos()
 {
 	return pos;
 }
 
-void CollisionComponent::setPos(Vector2 _pos)
+void CollisionComponent::SetPos(Vector2 _pos)
 {
 	pos = _pos;
 }
 
-short CollisionComponent::getTop()
+short CollisionComponent::GetTop()
 {
 	return top;
 }
 
-short CollisionComponent::getBottom()
+short CollisionComponent::GetBottom()
 {
 	return bottom;
 }
 
-short CollisionComponent::getLeft()
+short CollisionComponent::GetLeft()
 {
 	return left;
 }
 
-short CollisionComponent::getRight()
+short CollisionComponent::GetRight()
 {
 	return right;
 }
@@ -47,7 +47,7 @@ void CollisionComponent::Tick(GameData * _GD)
 	right = pos.x;
 }
 
-void CollisionComponent::setDimensions(float _top, float _bottom, float _left, float _right)
+void CollisionComponent::SetDimensions(float _top, float _bottom, float _left, float _right)
 {
 	top = _top;
 	bottom = _bottom;

@@ -6,8 +6,9 @@ enum GameState {
 	INVALID = 0,
 	MAIN_MENU = 1,
 	PLAY = 2,
-	GS_PAUSE = 3,
-	GS_GAME_OVER = 4
+	EDIT = 3,
+	PAUSE = 4,
+	GAME_OVER = 5
 };
 
 #endif

@@ -86,8 +86,8 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	Sprite* sprite1 = new Sprite(L"../Assets/Selection.dds", _pd3dDevice);
 	player->SetTileEditor(new TileEditor(sprite1));
 	player->DisableEditMode();
-	player->getPhysics()->enablePhysics(true);
-	player->getPhysics()->enableGravity(true);
+	player->GetPhysics()->enablePhysics(true);
+	player->GetPhysics()->enableGravity(true);
 	collision_manager->initPlayer(player.get());
 	game_data.follow_camera = camera.get();
 	game_data.game_state = GameState::PLAY;

@@ -10,7 +10,7 @@ SpriteGameObject::SpriteGameObject(Sprite* _texture, RECT* _rect)
 	, visible(true)
 	, rect(_rect)
 {
-	physics = new PhysicsComponent(pos, Vector2(0, 1.5f), 0.1f, 100.0f);
+	physics = new PhysicsComponent(pos, Vector2(0, 10.0f), 0.1f, 5.0f);
 	physics->enableGravity(false);
 	physics->enablePhysics(false);
 	collisions = new CollisionComponent(pos, 0, 64, 0, 64);
@@ -24,7 +24,10 @@ SpriteGameObject::~SpriteGameObject()
 void SpriteGameObject::Tick(GameData* _GD)
 {
 	if (collisions)
+	{
+		collisions->SetPos(pos);
 		collisions->Tick(_GD);
+	}
 
 	if(physics)
 		physics->tick(_GD);
@@ -90,12 +93,12 @@ void SpriteGameObject::SetRect(RECT* _rect)
 	rect = _rect;
 }
 
-PhysicsComponent * SpriteGameObject::getPhysics() const
+PhysicsComponent * SpriteGameObject::GetPhysics() const
 {
 	return physics;
 }
 
-CollisionComponent * SpriteGameObject::getCollisions() const
+CollisionComponent * SpriteGameObject::GetCollisions() const
 {
 	return collisions;
 }

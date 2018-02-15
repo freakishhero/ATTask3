@@ -68,12 +68,16 @@ wchar_t * TileManager::charToWChar(const char * _string)
 
 void TileManager::Tick(GameData * _GD)
 {
+	frames++;
 	for (auto& tile : _GD->tiles)
 	{
-		if (tile->GetTileType() != TileType::AIR)
-		{
+		if (!tile->IsSurfaceTile() && tile->GetTileType() != TileType::AIR && frames >= 600)
+		{	
 			CheckSurfaceTile(tile, _GD);
 		}
+
 		tile->SetSprite(tileSprites[(int)tile->GetTileType()]);
-	}	
+	}
+	if (frames >= 600)
+		frames = 0;
 }

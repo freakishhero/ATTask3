@@ -13,6 +13,7 @@ public:
 	void DestroyTile();
 	void SetTileType(TileType _type);
 	TileType GetTileType() const;
+	bool IsSurfaceTile();
 	void SetSurfaceTile(bool _state);
 	int GetID() const;
 	void SetID(int _ID);

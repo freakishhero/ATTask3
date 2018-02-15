@@ -16,6 +16,8 @@ public:
 	bool IsVisible() const override;
 	void SetVisible(bool _visible) override;
 	void SetTileEditor(TileEditor*);
+	void SetMoveLeft(bool _state);
+	void SetMoveRight(bool _state);
 	TileEditor* GetTileEditor();
 	void EnableEditMode();
 	void DisableEditMode();
@@ -26,4 +28,6 @@ private:
 	float move_speed;
 	float jump_height;
 	bool visible;
+	bool can_move_left;
+	bool can_move_right;
 };

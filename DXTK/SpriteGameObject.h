@@ -25,8 +25,8 @@ public:
 	RECT* GetRect() const;
 	void SetRect(RECT* _rect);
 
-	PhysicsComponent* getPhysics() const;
-	CollisionComponent* getCollisions() const;
+	PhysicsComponent* GetPhysics() const;
+	CollisionComponent* GetCollisions() const;
 	
 protected:
 	Sprite* sprite;

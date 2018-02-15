@@ -3,7 +3,9 @@
 #include "PlayerStates.h"
 #include "TileEditor.h"
 #include "DrawData2D.h"
+#include "PhysicsComponent.h"
 #include "GameData.h"
+#include "GameStates.h"
 #include "Sprite.h"
 #include "SpriteGameObject.h"
 #include <dinput.h>
@@ -34,27 +36,29 @@ void Player::Tick(GameData* _GD)
 		_GD->exit = true;
 	}
 
-	if (player_state != PlayerState::PS_EDIT)
+	if (_GD->game_state != GameState::EDIT)
 	{
-		if (_GD->keyboard_state[DIK_W] & 0x80)
+		if (_GD->keyboard_state[DIK_SPACE] & 0x80 && _GD->player_state != PlayerState::PS_JUMPING)
 		{
-			pos -= Vector2(0, 100) * _GD->delta_time;
+			physics->addForce(Vector2(0, -212) * _GD ->delta_time);
+			_GD->player_state = PlayerState::PS_JUMPING;
 		}
 		if (_GD->keyboard_state[DIK_S] & 0x80)
 		{
 			pos += Vector2(0, 100) * _GD->delta_time;
 		}
-		if (_GD->keyboard_state[DIK_A] & 0x80)
+		if (_GD->keyboard_state[DIK_A] & 0x80 && can_move_left)
 		{
 			pos -= Vector2(100, 0) * _GD->delta_time;
 		}
-		if (_GD->keyboard_state[DIK_D] & 0x80)
+		if (_GD->keyboard_state[DIK_D] & 0x80 && can_move_right)
 		{
 			pos += Vector2(100, 0) * _GD->delta_time;
 		}
 		if (_GD->keyboard_state[DIK_1] & 0x80)
 		{
 			EnableEditMode();
+			_GD->game_state = GameState::EDIT;
 		}
 	}
 	else 
@@ -62,6 +66,7 @@ void Player::Tick(GameData* _GD)
 		if (_GD->keyboard_state[DIK_2] & 0x80)
 		{
 			DisableEditMode();
+			_GD->game_state = GameState::PLAY;
 		}
 
 		tile_editor->SetPos(Vector2(
@@ -106,6 +111,7 @@ void Player::Tick(GameData* _GD)
 
 		tile_editor->Tick(_GD);
 	}
+	if(_GD->game_state != GameState::EDIT)
 	SpriteGameObject::Tick(_GD);
 }
 
@@ -138,6 +144,16 @@ void Player::SetTileEditor(TileEditor * _te)
 	tile_editor = _te;
 }
 
+void Player::SetMoveLeft(bool _state)
+{
+	can_move_left = _state;
+}
+
+void Player::SetMoveRight(bool _state)
+{
+	can_move_right = _state;
+}
+
 TileEditor * Player::GetTileEditor()
 {
 	return tile_editor;
@@ -145,14 +161,12 @@ TileEditor * Player::GetTileEditor()
 
 void Player::EnableEditMode()
 {
-	player_state = PlayerState::PS_EDIT;
 	visible = false;
 	tile_editor->SetVisible(true);
 }
 
 void Player::DisableEditMode()
 {
-	player_state = PlayerState::PS_GROUNDED;
 	visible = true;
 	tile_editor->SetVisible(false);
 }
