@@ -68,20 +68,12 @@ wchar_t * TileManager::charToWChar(const char * _string)
 
 void TileManager::Tick(GameData * _GD)
 {
-	Tile* surface_tile;
-
 	for (auto& tile : _GD->tiles)
 	{
 		if (tile->GetTileType() != TileType::AIR)
 		{
 			CheckSurfaceTile(tile, _GD);
 		}
-		
-	}
-
-	for (auto& tile : _GD->tiles)
-	{
 		tile->SetSprite(tileSprites[(int)tile->GetTileType()]);
-	}
-	
+	}	
 }

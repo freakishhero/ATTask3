@@ -28,4 +28,5 @@ struct GameData
 	const int TILE_SPRITES = 6;
 	const float TILE_WIDTH = 64;
 	const float TILE_HEIGHT = 64;
+	const int MAX_DEPTH = 16;
 };

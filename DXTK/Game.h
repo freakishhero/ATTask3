@@ -11,6 +11,7 @@ struct DrawData2D;
 struct GameData;
 class PerlinNoise;
 class TileManager;
+class CollisionManager;
 class InputHandler;
 class FollowCamera;
 class Player;
@@ -43,6 +44,7 @@ private:
 	std::unique_ptr<TileManager> tile_manager = nullptr;
 	std::unique_ptr<InputHandler> input_handler = nullptr;
 	std::unique_ptr<FollowCamera> camera = nullptr;
+	std::unique_ptr<CollisionManager> collision_manager = nullptr;
 
 	std::vector<Tile*> tiles;
 };

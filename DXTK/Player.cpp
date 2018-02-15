@@ -106,8 +106,6 @@ void Player::Tick(GameData* _GD)
 
 		tile_editor->Tick(_GD);
 	}
-	
-
 	SpriteGameObject::Tick(_GD);
 }
 

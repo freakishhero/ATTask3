@@ -2,12 +2,18 @@
 #include "DrawData2D.h"
 #include "GameData.h"
 #include "Sprite.h"
+#include "CollisionComponent.h"
+#include "PhysicsComponent.h"
 
 SpriteGameObject::SpriteGameObject(Sprite* _texture, RECT* _rect)
 	: sprite(_texture)
 	, visible(true)
 	, rect(_rect)
 {
+	physics = new PhysicsComponent(pos, Vector2(0, 1.5f), 0.1f, 100.0f);
+	physics->enableGravity(false);
+	physics->enablePhysics(false);
+	collisions = new CollisionComponent(pos, 0, 64, 0, 64);
 }
 
 SpriteGameObject::~SpriteGameObject()
@@ -17,6 +23,12 @@ SpriteGameObject::~SpriteGameObject()
 
 void SpriteGameObject::Tick(GameData* _GD)
 {
+	if (collisions)
+		collisions->Tick(_GD);
+
+	if(physics)
+		physics->tick(_GD);
+
 	if (!sprite)
 		return;
 }
@@ -76,4 +88,14 @@ RECT* SpriteGameObject::GetRect() const
 void SpriteGameObject::SetRect(RECT* _rect)
 {
 	rect = _rect;
+}
+
+PhysicsComponent * SpriteGameObject::getPhysics() const
+{
+	return physics;
+}
+
+CollisionComponent * SpriteGameObject::getCollisions() const
+{
+	return collisions;
 }

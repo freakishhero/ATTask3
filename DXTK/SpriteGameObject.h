@@ -2,7 +2,8 @@
 #include "GameObject2D.h"
 
 class Sprite;
-class BoundingBox2D;
+class PhysicsComponent;
+class CollisionComponent;
 
 class SpriteGameObject : public GameObject2D
 {
@@ -24,10 +25,14 @@ public:
 	RECT* GetRect() const;
 	void SetRect(RECT* _rect);
 
-
+	PhysicsComponent* getPhysics() const;
+	CollisionComponent* getCollisions() const;
+	
 protected:
 	Sprite* sprite;
 	bool visible;
 	RECT* rect;
+	PhysicsComponent* physics;
+	CollisionComponent* collisions;
 
 };

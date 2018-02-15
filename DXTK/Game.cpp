@@ -6,6 +6,8 @@
 #include "InputHandler.h"
 #include "SimpleMath.h"
 #include "FollowCamera.h"
+#include "PhysicsComponent.h"
+#include "CollisionManager.h"
 #include <windows.h>
 #include <time.h>
 #include "Tile.h"
@@ -40,6 +42,8 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	srand(static_cast<unsigned int>(time(nullptr)));
 
 	tile_manager = std::make_unique<TileManager>(&game_data, _pd3dDevice);
+
+	collision_manager = std::make_unique<CollisionManager>();
 	
 	// Camera that follows an object.
 	camera = std::make_unique<FollowCamera>(0.25f * XM_PI, game_data.aspect_ratio, 1.0f,
@@ -82,6 +86,9 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	Sprite* sprite1 = new Sprite(L"../Assets/Selection.dds", _pd3dDevice);
 	player->SetTileEditor(new TileEditor(sprite1));
 	player->DisableEditMode();
+	player->getPhysics()->enablePhysics(true);
+	player->getPhysics()->enableGravity(true);
+	collision_manager->initPlayer(player.get());
 	game_data.follow_camera = camera.get();
 	game_data.game_state = GameState::PLAY;
 
@@ -101,6 +108,7 @@ bool Game::Tick()
 
 	input_handler->Tick(&game_data);
 	tile_manager->Tick(&game_data);
+	collision_manager->tick(&game_data);
 
 	for (auto& tile : tiles)
 	{
@@ -136,11 +144,23 @@ void Game::generateChunk()
 
 		for (int j = game_data.window_height / game_data.TILE_HEIGHT; j > game_data.window_height / game_data.TILE_HEIGHT - height; j--) //y = height
 		{
-			tiles.push_back(tile_manager->createTile(i, TileType::DIRT , Vector2(i * game_data.TILE_WIDTH, j  * game_data.TILE_HEIGHT)));
+			Vector2 pos = Vector2(i * game_data.TILE_WIDTH, j  * game_data.TILE_HEIGHT);
+			int random = j == game_data.MAX_DEPTH - 1 ? rand() % 1 + 1 : rand() % 2 + 1;
+			if (j == game_data.MAX_DEPTH)
+			{
+				tiles.push_back(tile_manager->createTile(i, TileType::BEDROCK, Vector2(pos)));
+			}
+			else if (j > game_data.MAX_DEPTH - 4 && j < game_data.MAX_DEPTH && random == 1)
+			{
+				tiles.push_back(tile_manager->createTile(i, TileType::STONE, Vector2(pos)));
+			}
+			else
+			{
+				tiles.push_back(tile_manager->createTile(i, TileType::DIRT, Vector2(pos)));
+			}
 		}
-
 		//TO DO - FILL REST OF TILES WITH AIR
-		//ADD STONE GENERATION AND BEDROCK TO THE BOTTOM
+		//create all tiles using air and then loop through using perlin noise to set current tiles to something else???
 	}
 
 	/*

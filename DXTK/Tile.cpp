@@ -9,7 +9,6 @@ Tile::Tile(int _ID, TileType _type, Vector2 _position)
 	tile_type = _type;
 	pos = _position;
 	ID = _ID;
-
 	if (tile_type == TileType::BEDROCK)
 		destructable = false;
 }
