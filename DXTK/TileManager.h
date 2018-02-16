@@ -21,5 +21,5 @@ public:
 
 private:
 	std::vector<Sprite*> tileSprites;
-	int frames = 0;
+	float elapsed = 0;
 };
