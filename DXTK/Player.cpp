@@ -39,8 +39,6 @@ void Player::Tick(GameData* _GD)
 	if (!can_move_down)
 	{
 		physics->enableGravity(false);
-		physics->setVelocity(Vector2::Zero);
-		physics->setAcceleration(Vector2::Zero);
 	}
 	else 
 	{
@@ -57,6 +55,10 @@ void Player::Tick(GameData* _GD)
 		if (_GD->keyboard_state[DIK_W] & 0x80)
 		{
 			pos += Vector2(0, -100) * _GD->delta_time;
+		}
+		if (_GD->keyboard_state[DIK_S] & 0x80 && can_move_down)
+		{
+			pos += Vector2(0, 100) * _GD->delta_time;
 		}
 		if (_GD->keyboard_state[DIK_A] & 0x80 && can_move_left)
 		{

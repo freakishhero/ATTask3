@@ -22,7 +22,7 @@ public:
 	Vector2 getAcceleration() const;
 	void setAcceleration(Vector2 _acceleration); //sets acceleration of an object
 
-	void modifyPos(Vector2 direction, GameData* _GD); //moves an object in a direction
+	void modifyPos(Vector2 direction); //moves an object in a direction
 
 	bool gravityEnabled() const;
 	void enableGravity(bool state); //checks whether the object is using gravity

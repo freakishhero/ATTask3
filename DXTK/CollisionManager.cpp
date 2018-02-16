@@ -37,18 +37,15 @@ void CollisionManager::tick(GameData* _GD)
 			if (topCollision(player->GetCollisions(), tile->GetCollisions()))
 			{
 				std::cout << "top collision" << std::endl;
-				player->GetPhysics()->setVelocity(Vector2(0, 5.0));
+				player->ModifyPos(Vector2(0, 0.1));
 			}
 
 			if (bottomCollision(player->GetCollisions(), tile->GetCollisions()))
 			{
-				if (_GD->player_state == PlayerState::PS_JUMPING)
-				{
-					player->GetPhysics()->setAcceleration(Vector2::Zero);
-				}
-
 				std::cout << "bottom collision" << std::endl;
 				player->SetMoveDown(false);
+				player->GetPhysics()->setVelocity(Vector2::Zero);
+				player->GetPhysics()->setAcceleration(Vector2::Zero);
 			}
 
 			if (leftCollision(player->GetCollisions(), tile->GetCollisions()))
@@ -66,52 +63,46 @@ void CollisionManager::tick(GameData* _GD)
 	}
 }
 
-
 void CollisionManager::initPlayer(Player* _player)
 {
 	player = _player;
 }
-
-
 
 bool CollisionManager::leftCollision(CollisionComponent* _player_box, CollisionComponent* _object_box)
 {
 	if (_player_box->GetLeft() < _object_box->GetRight()
 		&& _player_box->GetLeft() > _object_box->GetLeft())
 	{
-		if (_player_box->GetTop() > _object_box->GetTop() / 2
-			&& _player_box->GetTop() < (_object_box->GetBottom() / 2))
+		if (_player_box->GetTop() > _object_box->GetTop() - 64
+			&& _player_box->GetTop() < (_object_box->GetBottom()))
 			return true;
 	}
 	return false;
 }
-
 
 bool CollisionManager::rightCollision(CollisionComponent* _player_box, CollisionComponent* _object_box)
 {
 	if (_player_box->GetRight() > _object_box->GetLeft() &&
 		_player_box->GetRight() < _object_box->GetRight())
 	{
-		if (_player_box->GetTop() > _object_box->GetTop() / 2
-			&& _player_box->GetTop() < (_object_box->GetBottom() / 2))
+		if (_player_box->GetTop() > _object_box->GetTop() - 64
+			&& _player_box->GetTop() < (_object_box->GetBottom()))
 			return true;
 	}
 	return false;
 }
-
 
 bool CollisionManager::topCollision(CollisionComponent* _player_box, CollisionComponent* _object_box)
 {
 	if (_player_box->GetTop() <= _object_box->GetBottom()
-		&& _player_box->GetTop() >= _object_box->GetTop())
+		&& _player_box->GetTop() >= _object_box->GetTop() + 32)
 	{
-		if (_player_box->GetLeft() >= _object_box->GetLeft() - (64 / 2)
-			&& _player_box->GetRight() <= (_object_box->GetRight()) + 32)
+		if (_player_box->GetLeft() >= _object_box->GetLeft() - 64
+			&& _player_box->GetRight() <= (_object_box->GetRight() + 64))
 			return true;
 	}
 	return false;
 }
-
 
 bool CollisionManager::bottomCollision(CollisionComponent* _player_box, CollisionComponent* _object_box)
 {
@@ -119,12 +110,11 @@ bool CollisionManager::bottomCollision(CollisionComponent* _player_box, Collisio
 		&& _player_box->GetBottom() <= _object_box->GetBottom())
 	{
 		if (_player_box->GetLeft() <= (_object_box->GetRight())
-			&& _player_box->GetLeft() >= _object_box->GetLeft())
+			&& _player_box->GetLeft() >= _object_box->GetLeft() - 64)
 			return true;
 	}
 	return false;
 }
-
 
 bool CollisionManager::checkCollision(CollisionComponent * _box_1, CollisionComponent * _box_2)
 {

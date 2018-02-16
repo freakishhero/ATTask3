@@ -35,9 +35,9 @@ void PhysicsComponent::setAcceleration(Vector2 _acceleration)
 	m_acceleration = _acceleration;
 }
 
-void PhysicsComponent::modifyPos(Vector2 direction, GameData* _GD)
+void PhysicsComponent::modifyPos(Vector2 direction)
 {
-	pos += direction * _GD->delta_time;
+	pos += direction;
 }
 
 bool PhysicsComponent::gravityEnabled() const
