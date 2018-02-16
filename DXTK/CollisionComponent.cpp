@@ -42,9 +42,9 @@ short CollisionComponent::GetRight()
 void CollisionComponent::Tick(GameData * _GD)
 {
 	top = pos.y;
-	bottom = pos.y;
+	bottom = pos.y + _GD->TILE_HEIGHT;
 	left = pos.x;
-	right = pos.x;
+	right = pos.x + _GD->TILE_WIDTH;
 }
 
 void CollisionComponent::SetDimensions(float _top, float _bottom, float _left, float _right)

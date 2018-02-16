@@ -1,25 +1,10 @@
-﻿  TileManager.cpp
-c:\users\freakish hero\desktop\mems\attask3\dxtk\gameobject2d.h(11): warning C4099: 'GameData': type name first seen using 'class' now seen using 'struct'
-  c:\users\freakish hero\desktop\mems\attask3\dxtk\tilemanager.h(8): note: see declaration of 'GameData'
+﻿  Player.cpp
   c:\program files (x86)\windows kits\8.1\include\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-c:\users\freakish hero\desktop\mems\attask3\dxtk\gamedata.h(11): warning C4099: 'GameData': type name first seen using 'class' now seen using 'struct'
-  c:\users\freakish hero\desktop\mems\attask3\dxtk\gamedata.h(10): note: see declaration of 'GameData'
-  TileEditor.cpp
-  Tile.cpp
-  c:\program files (x86)\windows kits\8.1\include\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-  Player.cpp
-  c:\program files (x86)\windows kits\8.1\include\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-c:\users\freakish hero\desktop\mems\attask3\dxtk\player.cpp(73): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
-c:\users\freakish hero\desktop\mems\attask3\dxtk\player.cpp(75): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
-c:\users\freakish hero\desktop\mems\attask3\dxtk\player.cpp(75): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
-c:\users\freakish hero\desktop\mems\attask3\dxtk\player.cpp(81): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
-c:\users\freakish hero\desktop\mems\attask3\dxtk\player.cpp(99): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
-  Game.cpp
-  c:\program files (x86)\windows kits\8.1\include\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-c:\users\freakish hero\desktop\mems\attask3\dxtk\tilemanager.h(8): warning C4099: 'GameData': type name first seen using 'struct' now seen using 'class'
-  c:\users\freakish hero\desktop\mems\attask3\dxtk\game.h(11): note: see declaration of 'GameData'
-c:\users\freakish hero\desktop\mems\attask3\dxtk\game.cpp(143): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\freakish hero\desktop\mems\attask3\dxtk\game.cpp(145): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\freakish hero\desktop\mems\attask3\dxtk\player.cpp(84): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+c:\users\freakish hero\desktop\mems\attask3\dxtk\player.cpp(86): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+c:\users\freakish hero\desktop\mems\attask3\dxtk\player.cpp(86): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
+c:\users\freakish hero\desktop\mems\attask3\dxtk\player.cpp(92): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
+c:\users\freakish hero\desktop\mems\attask3\dxtk\player.cpp(110): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
   CollisionManager.cpp
   c:\program files (x86)\windows kits\8.1\include\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
   Generating Code...

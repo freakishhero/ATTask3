@@ -18,6 +18,7 @@ public:
 	void SetTileEditor(TileEditor*);
 	void SetMoveLeft(bool _state);
 	void SetMoveRight(bool _state);
+	void SetMoveDown(bool _state);
 	TileEditor* GetTileEditor();
 	void EnableEditMode();
 	void DisableEditMode();
@@ -30,4 +31,5 @@ private:
 	bool visible;
 	bool can_move_left;
 	bool can_move_right;
+	bool can_move_down;
 };
