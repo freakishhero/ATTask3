@@ -20,6 +20,11 @@ Vector2 GameObject2D::GetPos() const
 	return pos + origin;
 }
 
+Vector2 GameObject2D::GetCenterPos() const
+{
+	return center_pos;
+}
+
 float GameObject2D::GetRot() const
 {
 	return rot;

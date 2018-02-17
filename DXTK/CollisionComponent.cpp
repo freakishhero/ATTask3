@@ -1,15 +1,11 @@
 #include "CollisionComponent.h"
 
-CollisionComponent::CollisionComponent(Vector2 _position, float _top, float _bottom, float _left, float _right)
+CollisionComponent::CollisionComponent(Vector2 _position)
 {
-	top = _top;
-	bottom = _bottom;
-	left = _left;
-	right = _right;
 	pos = _position;
 }
 
-Vector2 CollisionComponent::GetPos()
+Vector2 CollisionComponent::GetPos() const
 {
 	return pos;
 }
@@ -19,22 +15,22 @@ void CollisionComponent::SetPos(Vector2 _pos)
 	pos = _pos;
 }
 
-short CollisionComponent::GetTop()
+short CollisionComponent::GetTop() const
 {
 	return top;
 }
 
-short CollisionComponent::GetBottom()
+short CollisionComponent::GetBottom() const
 {
 	return bottom;
 }
 
-short CollisionComponent::GetLeft()
+short CollisionComponent::GetLeft() const
 {
 	return left;
 }
 
-short CollisionComponent::GetRight()
+short CollisionComponent::GetRight() const
 {
 	return right;
 }
@@ -45,12 +41,4 @@ void CollisionComponent::Tick(GameData * _GD)
 	bottom = pos.y + _GD->TILE_HEIGHT;
 	left = pos.x;
 	right = pos.x + _GD->TILE_WIDTH;
-}
-
-void CollisionComponent::SetDimensions(float _top, float _bottom, float _left, float _right)
-{
-	top = _top;
-	bottom = _bottom;
-	left = _left;
-	right = _right;
 }

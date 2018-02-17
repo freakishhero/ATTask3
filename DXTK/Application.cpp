@@ -35,6 +35,12 @@ Application::~Application()
 //--------------------------------------------------------------------------------------
 HRESULT Application::InitWindow(HINSTANCE _hInstance, int _nCmdShow)
 {
+	if (AllocConsole()) {
+		freopen("CONOUT$", "w", stdout);
+		SetConsoleTitle(L"Debug Console");
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);
+	}
+
 	// Register class
 	WNDCLASSEX wcex;
 	wcex.cbSize = sizeof(WNDCLASSEX);
@@ -47,34 +53,18 @@ HRESULT Application::InitWindow(HINSTANCE _hInstance, int _nCmdShow)
 	wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
 	wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
 	wcex.lpszMenuName = nullptr;
-	wcex.lpszClassName = L"GEAWindowClass";
+	wcex.lpszClassName = L"AdvancedTech";
 	wcex.hIconSm = LoadIcon(wcex.hInstance, (LPCTSTR)IDI_ASTERISK);
 	if (!RegisterClassEx(&wcex))
 		return E_FAIL;
 
 	// Create window
 	m_hInst = _hInstance;
-#ifdef DEBUG
-	RECT rc = { 0, 0, 1024, 768 };
+	RECT rc = { 0, 0, 1920, 1080 };
 	AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
-	m_hWnd = CreateWindow(L"GEAWindowClass", L"GEA GROUP PROJECT", WS_OVERLAPPEDWINDOW,
+	m_hWnd = CreateWindow(L"AdvancedTech", L"DXYK - Procedural Tile Generation", WS_OVERLAPPEDWINDOW,
 		600, 100, rc.right - rc.left, rc.bottom - rc.top, nullptr, nullptr, _hInstance,
 		nullptr);
-#else
-	int SCREEN_WIDTH = GetSystemMetrics(SM_CXSCREEN);
-	int SCREEN_HEIGHT = GetSystemMetrics(SM_CYSCREEN);
-	//Go to Fullscreen in Release
-	m_hWnd = CreateWindowEx(NULL,
-		L"GEAWindowClass",
-		L"GEA GROUP PROJECT",
-		WS_EX_TOPMOST | WS_POPUP,    // fullscreen values
-		0, 0,    // the starting x and y positions should be 0
-		SCREEN_WIDTH, SCREEN_HEIGHT,
-		NULL,
-		NULL,
-		_hInstance,
-		NULL);
-#endif
 
 	if (!m_hWnd)
 	{

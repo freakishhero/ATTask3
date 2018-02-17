@@ -33,6 +33,7 @@ private:
 	DWORD play_time; //amount of time since the game started
 	HWND        hWnd;
 
+	void createTiles();
 	void generateChunk();
 	// Game Objects
 	GameData game_data;

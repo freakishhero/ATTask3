@@ -50,7 +50,6 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 		10000.0f, player.get(), Vector3(0, 0, -100));
 
 	noise = new PerlinNoise(rand() % 1000000 + 10000000);
-	generateChunk();
 
 	/*float x = 0;
 	float y = game_data.window_height - 64;;
@@ -80,7 +79,12 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 		}
 	}*/
 
+	//Generates air tiles and assigns them a type using perlin noise.
+	createTiles();
 	game_data.tiles = tiles;
+	generateChunk();
+	game_data.tiles = tiles;
+
 	Sprite* sprite = new Sprite(L"../Assets/Player.dds", _pd3dDevice);
 	player = std::make_unique<Player>(sprite);
 	Sprite* sprite1 = new Sprite(L"../Assets/Selection.dds", _pd3dDevice);
@@ -130,14 +134,62 @@ void Game::Draw(ID3D11DeviceContext * _pd3dImmediateContext)
 	for (auto& tile : tiles)
 	{
 		tile->Draw(&draw_data);
+
 	}
 
 	player->Draw(&draw_data);
 	draw_data.sprite_batch->End();
 }
 
+void Game::createTiles()
+{
+	int id = 0;
+	for (int w = 0; w < game_data.window_width / game_data.TILE_WIDTH; w++)
+	{
+		for (int h = 0; h < game_data.window_width / game_data.TILE_WIDTH; h++)
+		{
+			Vector2 pos = Vector2(w * game_data.TILE_WIDTH, h  * game_data.TILE_HEIGHT);
+			tiles.push_back(tile_manager->createTile(id, TileType::AIR, Vector2(pos)));
+			id++;
+		}
+	}
+}
+
 void Game::generateChunk()
 {
+	for (int i = 0; i < game_data.window_width / game_data.TILE_WIDTH; i++) //x = width 
+	{
+		int height = 2 + noise->generateNoise(i, game_data.TILE_HEIGHT / 6);
+
+		for (int j = game_data.window_height / game_data.TILE_HEIGHT; j > game_data.window_height / game_data.TILE_HEIGHT - height; j--) //y = height
+		{
+			Vector2 pos = Vector2(i * game_data.TILE_WIDTH, j  * game_data.TILE_HEIGHT);
+			for (auto& tile : game_data.tiles)
+			{
+				if (tile->GetPos() == pos)
+				{
+					int random = j == game_data.MAX_DEPTH - 1 ? rand() % 1 + 1 : rand() % 2 + 1;
+					if (j == game_data.MAX_DEPTH)
+					{
+						//tiles.push_back(tile_manager->createTile(i, TileType::BEDROCK, Vector2(pos)));
+						tile->SetTileType(TileType::BEDROCK);
+					}
+					else if (j > game_data.MAX_DEPTH - 4 && j < game_data.MAX_DEPTH && random == 1)
+					{
+						//tiles.push_back(tile_manager->createTile(game_data.tiles.size(), TileType::STONE, Vector2(pos)));
+						tile->SetTileType(TileType::STONE);
+					}
+					else
+					{
+						//tiles.push_back(tile_manager->createTile(i, TileType::DIRT, Vector2(pos)));
+						tile->SetTileType(TileType::DIRT);
+					}
+				}
+			}
+		}
+	}
+
+	/*
 	for (int i = 0; i < game_data.window_width / game_data.TILE_WIDTH; i++) //x = width 
 	{
 		int height = 2 + noise->generateNoise(i, game_data.TILE_HEIGHT / 6);
@@ -159,9 +211,10 @@ void Game::generateChunk()
 				tiles.push_back(tile_manager->createTile(i, TileType::DIRT, Vector2(pos)));
 			}
 		}
+		
 		//TO DO - FILL REST OF TILES WITH AIR
 		//create all tiles using air and then loop through using perlin noise to set current tiles to something else???
-	}
+	}*/
 
 	/*
 	for (int i = 0; i < 600; i++)

@@ -22,6 +22,7 @@ public:
 
 	//getters
 	Vector2 GetPos() const;
+	Vector2 GetCenterPos() const;
 	float GetRot() const;
 	Color GetColor() const;
 	Vector2 GetScale() const;
@@ -42,6 +43,7 @@ public:
 
 protected:
 	Vector2 pos;
+	Vector2 center_pos;
 	float rot;
 	Vector2 scale;
 	Color color;

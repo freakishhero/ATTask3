@@ -13,7 +13,7 @@ SpriteGameObject::SpriteGameObject(Sprite* _texture, RECT* _rect)
 	physics = new PhysicsComponent(pos, Vector2(0, 10.0f), 0.1f, 5.0f);
 	physics->enableGravity(false);
 	physics->enablePhysics(false);
-	collisions = new CollisionComponent(pos, 0, 64, 0, 64);
+	collisions = new CollisionComponent(pos);
 }
 
 SpriteGameObject::~SpriteGameObject()
@@ -34,6 +34,8 @@ void SpriteGameObject::Tick(GameData* _GD)
 
 	if (!sprite)
 		return;
+
+	center_pos = Vector2(pos.x + _GD->TILE_WIDTH / 2, pos.y + _GD->TILE_HEIGHT / 2);
 }
 
 void SpriteGameObject::Draw(DrawData2D* _DD)

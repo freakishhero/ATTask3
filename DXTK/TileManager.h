@@ -15,7 +15,6 @@ public:
 	~TileManager();
 
 	Tile* createTile(int ID, TileType _type, DirectX::SimpleMath::Vector2 _position);
-	void CheckSurfaceTile(Tile* _tile, GameData* _GD);
 	wchar_t* charToWChar(const char* _string);
 	void Tick(GameData* _GD);
 

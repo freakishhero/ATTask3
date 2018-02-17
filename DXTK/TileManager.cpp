@@ -24,29 +24,7 @@ Tile* TileManager::createTile(int _ID, TileType _type, DirectX::SimpleMath::Vect
 {
 	Tile* tile = new Tile(_ID, _type, _position);
 	tile->SetSprite(tileSprites[(int)_type]);
-
 	return tile;
-}
-
-void TileManager::CheckSurfaceTile(Tile * _tile, GameData* _GD)
-{
-	for (auto& tile : _GD->tiles)
-	{
-		if (_tile != tile && tile->GetTileType() != TileType::AIR)
-		{
-			if (_tile->GetPos().x == tile->GetPos().x)
-			{
-				if (_tile->GetPos().y < tile->GetPos().y)
-				{
-					_tile->SetSurfaceTile(true);
-				}
-				else
-				{
-					_tile->SetSurfaceTile(false);
-				}
-			}
-		}
-	}
 }
 
 wchar_t * TileManager::charToWChar(const char * _string)
@@ -73,9 +51,15 @@ void TileManager::Tick(GameData * _GD)
 	{
 		if (!tile->IsSurfaceTile() && tile->GetTileType() != TileType::AIR && elapsed >= 10)
 		{	
-			CheckSurfaceTile(tile, _GD);
+			if (tile->checkSurfaceTile(_GD))
+			{
+				tile->SetSurfaceTile(true);
+			}
+			else
+			{
+				tile->SetSurfaceTile(false);
+			}
 		}
-
 		tile->SetSprite(tileSprites[(int)tile->GetTileType()]);
 	}
 	if (elapsed >= 10)

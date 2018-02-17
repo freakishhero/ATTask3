@@ -43,6 +43,11 @@ void Tile::DestroyTile()
 void Tile::SetTileType(TileType _type)
 {
 	tile_type = _type;
+	if (tile_type == TileType::BEDROCK)
+
+		destructable = false;
+	else
+		destructable = true;
 }
 
 TileType Tile::GetTileType() const
@@ -52,7 +57,8 @@ TileType Tile::GetTileType() const
 
 bool Tile::IsSurfaceTile()
 {
-	return surface_tile;
+	return surface_tile
+		;
 }
 
 void Tile::SetSurfaceTile(bool _state)
@@ -73,4 +79,22 @@ void Tile::SetID(int _ID)
 bool Tile::isDestructable()
 {
 	return destructable;
+}
+
+bool Tile::checkSurfaceTile(GameData* _GD)
+{
+	for (auto& tile : _GD->tiles)
+	{
+		if (tile != this && tile->GetPos().x == this->pos.x)
+		{
+			if (tile->GetPos().y == this->GetPos().y - 64)
+			{
+				if (tile->GetTileType() == TileType::AIR)
+				{
+					return true;
+				}
+			}
+		}
+	}
+	return false;
 }

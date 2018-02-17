@@ -9,22 +9,21 @@ using namespace SimpleMath;
 class CollisionComponent
 {
 public:
-	CollisionComponent(Vector2 _pos, float _top, float _bottom, float _left, float _right);
+	CollisionComponent(Vector2 _position);
 	~CollisionComponent() = default;
 
-	short GetTop();
-	short GetBottom();
-	short GetLeft();
-	short GetRight();
+	short GetTop() const;
+	short GetBottom() const;
+	short GetLeft() const;
+	short GetRight() const;
 	void Tick(GameData* _GD);
-	Vector2 GetPos();
+	Vector2 GetPos() const;
 	void SetPos(Vector2 _pos);
-	void SetDimensions(float _top, float _bottom, float _left, float _right);
 
 private:
-	float top = 0.0f;
-	float left = 0.0f;
-	float right = 64.0f;
-	float bottom = 64.0f;
-	Vector2 pos;
+	short top = 0;
+	short left = 0;
+	short right = 0;
+	short bottom = 0;
+	Vector2 pos = Vector2::Zero;
 };

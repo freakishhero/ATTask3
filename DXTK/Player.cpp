@@ -49,24 +49,21 @@ void Player::Tick(GameData* _GD)
 	{
 		if (_GD->keyboard_state[DIK_SPACE] & 0x80 && _GD->player_state != PlayerState::PS_JUMPING)
 		{
-			physics->addForce(Vector2(0, -212) * _GD ->delta_time);
+			pos += Vector2(0, -1) * _GD->delta_time;
+			physics->addForce(Vector2(0, -200) * _GD ->delta_time);
 			_GD->player_state = PlayerState::PS_JUMPING;
 		}
 		if (_GD->keyboard_state[DIK_W] & 0x80)
 		{
-			pos += Vector2(0, -100) * _GD->delta_time;
-		}
-		if (_GD->keyboard_state[DIK_S] & 0x80 && can_move_down)
-		{
-			pos += Vector2(0, 100) * _GD->delta_time;
+			pos += Vector2(0, -1000) * _GD->delta_time;
 		}
 		if (_GD->keyboard_state[DIK_A] & 0x80 && can_move_left)
 		{
-			pos -= Vector2(100, 0) * _GD->delta_time;
+			pos -= Vector2(300, 0) * _GD->delta_time;
 		}
 		if (_GD->keyboard_state[DIK_D] & 0x80 && can_move_right)
 		{
-			pos += Vector2(100, 0) * _GD->delta_time;
+			pos += Vector2(300, 0) * _GD->delta_time;
 		}
 		if (_GD->keyboard_state[DIK_1] & 0x80)
 		{
