@@ -96,7 +96,9 @@ void Player::Tick(GameData* _GD)
 						{
 							if (tile->isDestructable())
 							{
-								//if (tile->GetTileType() != TileType::AIR)
+								if (tile_replace != TileType::AIR && tile->GetTileType() == TileType::AIR)
+									tile->SetTileType(tile_replace);
+								if (tile_replace == TileType::AIR && tile->GetTileType() != TileType::AIR)
 									tile->SetTileType(tile_replace);
 							}
 						}
@@ -126,6 +128,10 @@ void Player::Tick(GameData* _GD)
 
 		tile_editor->Tick(_GD);
 	}
+
+	if (pos.y > _GD->MAX_DEPTH * (_GD->TILE_HEIGHT * 2))
+		pos = Vector2(0, -640);
+
 	if(_GD->game_state != GameState::EDIT)
 	SpriteGameObject::Tick(_GD);
 }

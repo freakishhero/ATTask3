@@ -174,6 +174,7 @@ void Game::Draw(ID3D11DeviceContext * _pd3dImmediateContext)
 
 	player->Draw(&draw_data);
 	draw_data.sprite_batch->End();
+	if(game_data.game_state == GameState::EDIT)
 	TwDraw();
 }
 
@@ -182,7 +183,7 @@ void Game::createTiles()
 	int id = 0;
 	for (int w = 0; w < game_data.window_width / game_data.TILE_WIDTH; w++)
 	{
-		for (int h = 0; h < game_data.window_width / game_data.TILE_WIDTH; h++)
+		for (int h = 0; h < game_data.window_height / game_data.TILE_HEIGHT; h++)
 		{
 			Vector2 pos = Vector2(w * game_data.TILE_WIDTH, h  * game_data.TILE_HEIGHT);
 			tiles.push_back(tile_manager->createTile(id, TileType::AIR, Vector2(pos)));
@@ -221,6 +222,21 @@ void Game::generateChunk()
 						tile->SetTileType(TileType::DIRT);
 					}
 				}
+			}
+		}
+	}
+
+	for (auto& tile : game_data.tiles)
+	{
+		if (!tile->IsSurfaceTile() && tile->GetTileType() != TileType::AIR)
+		{
+			if (tile->checkSurfaceTile(&game_data))
+			{
+				tile->SetSurfaceTile(true);
+			}
+			else
+			{
+				tile->SetSurfaceTile(false);
 			}
 		}
 	}
