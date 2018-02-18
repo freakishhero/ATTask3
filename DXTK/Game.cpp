@@ -15,9 +15,12 @@
 #include "Sprite.h"
 #include "PerlinNoise.h"
 #include <d3d11.h>
+#include <AntTweakBar.h>
 
 using namespace DirectX;
 using namespace SimpleMath;
+
+void TW_CALL ResetPos(void* clientData);
 
 Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	: play_time()
@@ -29,6 +32,11 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	game_data.window_width = rc.right - rc.left;
 	game_data.window_height = rc.bottom - rc.top;
 	game_data.aspect_ratio = static_cast<float>(game_data.window_width) / static_cast<float>(game_data.window_height);
+
+	TwInit(TW_DIRECT3D11, _pd3dDevice); // for Direct3D 11
+	TwWindowSize(game_data.window_width, game_data.window_height);
+	TwBar* tweakBar;
+	tweakBar = TwNewBar("Control Panel");
 
 	input_handler = std::make_unique<InputHandler>(&game_data, _hWnd, _hInstance);
 
@@ -47,9 +55,9 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	
 	// Camera that follows an object.
 	camera = std::make_unique<FollowCamera>(0.25f * XM_PI, game_data.aspect_ratio, 1.0f,
-		10000.0f, player.get(), Vector3(0, 0, -100));
+		10000.0f, nullptr, Vector3(0, 0, -100));
 
-	noise = new PerlinNoise(rand() % 1000000 + 10000000);
+	noise = std::make_unique<PerlinNoise>(rand() % 1000000 + 10000000);
 
 	/*float x = 0;
 	float y = game_data.window_height - 64;;
@@ -95,12 +103,37 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	collision_manager->initPlayer(player.get());
 	game_data.follow_camera = camera.get();
 	game_data.game_state = GameState::PLAY;
+	game_data.follow_camera->SetTarget(player.get());
+
+	//Tweak Bar Control Panel
+	//TwAddButton(tweakBar, "Create Sand", ResetPos, this, "label='Create a new grain of sand'");
+	// Create a new TwType called rotationType associated with the Scene::RotMode enum, and use it
+	TwEnumVal editor_tiles[] = { 
+	{ (int)TileType::AIR, "Empty" },
+	{ (int)TileType::DIRT,  "Dirt" },
+	{ (int)TileType::COBBLESTONE, "Cobblestone" },
+	{ (int)TileType::STONE, "Stone" },
+	{ (int)TileType::SAND, "Sand" },
+	{ (int)TileType::PLANK, "Plank" }
+	};
+
+	TwType tileType = TwDefineEnum("Block", editor_tiles, 6);
+	TwAddVarRW(tweakBar, "Selected Tile", tileType, player->GetTileReplace(),
+		" group='Scene' keyIncr=f1 keyDecr=f2 help='Change the tile to place' ");
 
 }
 
 
 Game::~Game()
 {
+	TwTerminate();
+}
+
+void TW_CALL ResetPos(void* clientData)
+{
+	// do something
+	Game* game = static_cast<Game*>(clientData);
+	game->GetPlayer()->SetPos(Vector2::Zero);
 }
 
 // Executes the basic game loop.
@@ -119,6 +152,8 @@ bool Game::Tick()
 		tile->Tick(&game_data);
 	}
 	player->Tick(&game_data);
+
+	game_data.follow_camera->Tick(&game_data);
 
 	if (game_data.exit == true)
 	{
@@ -139,6 +174,7 @@ void Game::Draw(ID3D11DeviceContext * _pd3dImmediateContext)
 
 	player->Draw(&draw_data);
 	draw_data.sprite_batch->End();
+	TwDraw();
 }
 
 void Game::createTiles()
@@ -232,4 +268,9 @@ void Game::generateChunk()
 		}
 	}
 	*/
+}
+
+Player* Game::GetPlayer()
+{
+	return player.get();
 }

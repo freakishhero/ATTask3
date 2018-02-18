@@ -7,5 +7,7 @@ enum class TileType
 	DIRT = 2,
 	STONE = 3,
 	COBBLESTONE = 4,
-	BEDROCK = 5
+	BEDROCK = 5,
+	SAND = 6,
+	PLANK = 7
 };

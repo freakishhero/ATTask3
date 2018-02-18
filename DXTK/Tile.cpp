@@ -24,6 +24,10 @@ void Tile::Tick(GameData * _GD)
 	{
 		tile_type = TileType::GRASS;
 	}
+
+	if (tile_type == TileType::SAND)
+		sandPhysics(_GD);
+
 	SpriteGameObject::Tick(_GD);
 }
 
@@ -97,4 +101,27 @@ bool Tile::checkSurfaceTile(GameData* _GD)
 		}
 	}
 	return false;
+}
+
+void Tile::sandPhysics(GameData * _GD)
+{
+	for (auto& tile : _GD->tiles)
+	{
+		if (tile != this && tile->GetPos().x == this->pos.x)
+		{
+			if (tile->GetPos().y == this->GetPos().y + 64)
+			{
+				if (tile->GetTileType() == TileType::AIR)
+				{
+					tile->SetTileType(TileType::SAND);
+					this->SetTileType(TileType::AIR);
+				}
+				else if (tile->GetTileType() == TileType::GRASS)
+				{
+					tile->SetTileType(TileType::DIRT);
+					tile->surface_tile = false;
+				}
+			}
+		}
+	}
 }

@@ -27,6 +27,7 @@ public:
     // Basic game loop
     bool Tick();
 	void Draw(ID3D11DeviceContext* _pd3dImmediateContext);
+	Player* GetPlayer();
 
 private:
     // Device resources.
@@ -38,10 +39,9 @@ private:
 	// Game Objects
 	GameData game_data;
 	DrawData2D draw_data;
-	PerlinNoise* noise;
-
+	std::unique_ptr<PerlinNoise> noise;
 	std::unique_ptr<Player> player = nullptr;
-
+	
 	std::unique_ptr<TileManager> tile_manager = nullptr;
 	std::unique_ptr<InputHandler> input_handler = nullptr;
 	std::unique_ptr<FollowCamera> camera = nullptr;

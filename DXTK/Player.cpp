@@ -10,11 +10,13 @@
 #include "SpriteGameObject.h"
 #include <dinput.h>
 #include <cmath>
+#include "FollowCamera.h"
 
 Player::Player(Sprite* _sprite)
 	: visible(true)
 {
 	player_state = PlayerState::PS_GROUNDED;
+	tile_replace = TileType::AIR;
 	sprite = _sprite;
 }
 
@@ -80,44 +82,47 @@ void Player::Tick(GameData* _GD)
 		}
 
 		tile_editor->SetPos(Vector2(
-			_GD->mouse_pos.x = floor(_GD->mouse_pos.x / _GD->TILE_WIDTH) * _GD->TILE_WIDTH,
-			_GD->mouse_pos.y = floor(_GD->mouse_pos.y / _GD->TILE_HEIGHT) * _GD->TILE_HEIGHT
-			));
+			(_GD->mouse_pos.x - ((_GD->window_width / 2) - _GD->follow_camera->GetPos().x)) - 32,
+			(_GD->mouse_pos.y - ((_GD->window_height / 2) - _GD->follow_camera->GetPos().y)) - 32));
 
 			if (_GD->mouse_state->rgbButtons[0])
 			{
 				for (auto& tile : _GD->tiles)
 				{
-					if (tile->GetPos() == Vector2(_GD->mouse_pos.x, _GD->mouse_pos.y))
+					//if (tile->GetPos() == Vector2(_GD->mouse_pos.x, _GD->mouse_pos.y))
+					if(tile_editor->GetPos().x > tile->GetPos().x - 32 && tile_editor->GetPos().x < tile->GetPos().x + 32)
 					{
-						if (tile->isDestructable())
+						if (tile_editor->GetPos().y > tile->GetPos().y - 32 && tile_editor->GetPos().y < tile->GetPos().y + 32)
 						{
-							if (tile->GetTileType() != TileType::AIR)
-								tile->DestroyTile();
+							if (tile->isDestructable())
+							{
+								//if (tile->GetTileType() != TileType::AIR)
+									tile->SetTileType(tile_replace);
+							}
 						}
-						
-						//else
-							//tile->SetTileType(TileType::COBBLESTONE);
 					}
 				}
 			}
 
-			if (_GD->mouse_state->rgbButtons[0] && _GD->keyboard_state[DIK_LSHIFT] & 0x80)
+			/*if (_GD->mouse_state->rgbButtons[0] && _GD->keyboard_state[DIK_LSHIFT] & 0x80)
 			{
 				for (auto& tile : _GD->tiles)
 				{
-					if (tile->GetPos() == Vector2(_GD->mouse_pos.x, _GD->mouse_pos.y))
+					if (tile_editor->GetPos().x > tile->GetPos().x - 32 && tile_editor->GetPos().x < tile->GetPos().x + 32)
 					{
-						if (tile->GetTileType() == TileType::AIR)
+						if (tile_editor->GetPos().y > tile->GetPos().y - 32 && tile_editor->GetPos().y < tile->GetPos().y + 32)
 						{
-								tile->SetTileType(TileType::COBBLESTONE);
-						}
+							if (tile->GetTileType() == TileType::AIR)
+							{
+								tile->SetTileType(TileType::SAND);
+							}
 
-						//else
-						//tile->SetTileType(TileType::COBBLESTONE);
+							//else
+							//tile->SetTileType(TileType::COBBLESTONE);
+						}
 					}
 				}
-			}
+			}*/
 
 		tile_editor->Tick(_GD);
 	}
@@ -135,7 +140,7 @@ void Player::Draw(DrawData2D* _DD)
 
 	if (tile_editor)
 	{
-		tile_editor->Draw(_DD);
+		//tile_editor->Draw(_DD);
 	}
 }
 
@@ -169,9 +174,19 @@ void Player::SetMoveDown(bool _state)
 	can_move_down = _state;
 }
 
+void Player::SetTypeReplace(TileType _type)
+{
+	tile_replace = _type;
+}
+
 TileEditor * Player::GetTileEditor()
 {
 	return tile_editor;
+}
+
+TileType* Player::GetTileReplace()
+{
+	return &tile_replace;
 }
 
 void Player::EnableEditMode()

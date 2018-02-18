@@ -16,6 +16,7 @@ public:
 	bool IsSurfaceTile();
 	void SetSurfaceTile(bool _state);
 	bool checkSurfaceTile(GameData* _GD);
+	void sandPhysics(GameData* _GD);
 	int GetID() const;
 	void SetID(int _ID);
 	bool isDestructable();

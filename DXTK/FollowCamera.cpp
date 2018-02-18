@@ -4,10 +4,10 @@
 
 FollowCamera::FollowCamera(float _fov, float _aspect, float _near, float _far, GameObject2D* _target, Vector3 _dpos, Vector3 _up)
 	: Camera(_fov, _aspect, _near, _far)
-	, target(_target)
 	, dpos(_dpos)
-	, y_offset(50)
+	, y_offset(0)
 {
+	target = _target;
 }
 
 
@@ -32,7 +32,16 @@ void FollowCamera::FollowTarget(GameData* _GD)
 {
 	if (!target)
 		return;
-
+	/*
+	if ((int)target->GetPos().x % 64 == 0)
+	{
+		SetPos(Vector3(target->GetPos().x, pos.y, 0) + dpos);
+	}
+	if ((int)target->GetPos().y % 64 == 0)
+	{
+		SetPos(Vector3(target->GetPos().x, pos.y, 0) + dpos);
+	}
+	*/
 	Vector2 target_pos = target->GetPos();
-	SetPos(Vector3(target_pos.x, target_pos.y + y_offset, 0) + dpos);
+	SetPos(Vector3(target_pos.x, target_pos.y, 0));
 }

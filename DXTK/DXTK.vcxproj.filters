@@ -11,75 +11,96 @@
     <Filter Include="Source">
       <UniqueIdentifier>{08ea3341-602c-43e0-92f2-8f7a26f39fdf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header\Objects">
+      <UniqueIdentifier>{2a00dc5c-c0de-456e-8640-a0333270abe2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Managers">
+      <UniqueIdentifier>{924685b8-c9c3-40e5-ad8d-63fc291020f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\ObjectComponents">
+      <UniqueIdentifier>{713c3078-8570-4810-854f-b416bfb2b733}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Data">
+      <UniqueIdentifier>{cb68130a-2cd2-4acd-a48d-0f8645ee0ca3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Managers">
+      <UniqueIdentifier>{10f77eb5-2e2c-40ff-be73-93b76840bd2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Objects">
+      <UniqueIdentifier>{9e74fd4f-e9a0-47ca-8324-70efe0af90cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ObjectComponents">
+      <UniqueIdentifier>{61a46981-56a7-4777-8512-682fe4e58402}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="StepTimer.h" />
-    <ClInclude Include="GameObject.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="GameData.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="GameStates.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerStates.h">
-      <Filter>Header</Filter>
-    </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="Application.h">
       <Filter>Header</Filter>
     </ClInclude>
-    <ClInclude Include="FollowCamera.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject2D.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteGameObject.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="DrawData2D.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="Tile.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="TileType.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="TileManager.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="InputHandler.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="TileEditor.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="PerlinNoise.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsComponent.h">
-      <Filter>Header</Filter>
+    <ClInclude Include="Camera.h">
+      <Filter>Header\Objects</Filter>
     </ClInclude>
     <ClInclude Include="CollisionComponent.h">
-      <Filter>Header</Filter>
+      <Filter>Header\ObjectComponents</Filter>
     </ClInclude>
     <ClInclude Include="CollisionManager.h">
-      <Filter>Header</Filter>
+      <Filter>Header\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameData.h">
+      <Filter>Header\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject2D.h">
+      <Filter>Header\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStates.h">
+      <Filter>Header\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="FollowCamera.h">
+      <Filter>Header\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawData2D.h">
+      <Filter>Header\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="PerlinNoise.h">
+      <Filter>Header\ObjectComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsComponent.h">
+      <Filter>Header\ObjectComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="InputHandler.h">
+      <Filter>Header\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="TileManager.h">
+      <Filter>Header\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStates.h">
+      <Filter>Header\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Header\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Header\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteGameObject.h">
+      <Filter>Header\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="TileEditor.h">
+      <Filter>Header\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="TileType.h">
+      <Filter>Header\Data</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -90,53 +111,53 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Application.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="FollowCamera.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject2D.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteGameObject.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Tile.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="TileManager.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="InputHandler.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="TileEditor.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="PerlinNoise.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysicsComponent.cpp">
-      <Filter>Source</Filter>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source\Objects</Filter>
     </ClCompile>
     <ClCompile Include="CollisionComponent.cpp">
-      <Filter>Source</Filter>
+      <Filter>Source\ObjectComponents</Filter>
     </ClCompile>
     <ClCompile Include="CollisionManager.cpp">
-      <Filter>Source</Filter>
+      <Filter>Source\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="FollowCamera.cpp">
+      <Filter>Source\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject2D.cpp">
+      <Filter>Source\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="InputHandler.cpp">
+      <Filter>Source\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="PerlinNoise.cpp">
+      <Filter>Source\ObjectComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsComponent.cpp">
+      <Filter>Source\ObjectComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Source\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteGameObject.cpp">
+      <Filter>Source\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Source\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="TileManager.cpp">
+      <Filter>Source\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="TileEditor.cpp">
+      <Filter>Source\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
