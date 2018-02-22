@@ -55,6 +55,7 @@ Vector3 GameObject::GetScale() const
 
 Matrix GameObject::GetWorldMat() const
 {
+
 	return world_mat;
 }
 

@@ -102,6 +102,9 @@
     <ClInclude Include="TileType.h">
       <Filter>Header\Data</Filter>
     </ClInclude>
+    <ClInclude Include="Chunk.h">
+      <Filter>Header\Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -157,6 +160,9 @@
       <Filter>Source\Managers</Filter>
     </ClCompile>
     <ClCompile Include="TileEditor.cpp">
+      <Filter>Source\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Chunk.cpp">
       <Filter>Source\Objects</Filter>
     </ClCompile>
   </ItemGroup>

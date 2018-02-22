@@ -10,10 +10,9 @@
 #include "CollisionManager.h"
 #include <windows.h>
 #include <time.h>
-#include "Tile.h"
+#include "Chunk.h"
 #include "Player.h"
 #include "Sprite.h"
-#include "PerlinNoise.h"
 #include <d3d11.h>
 #include <AntTweakBar.h>
 
@@ -49,49 +48,17 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	// Seed the random number generator.
 	srand(static_cast<unsigned int>(time(nullptr)));
 
-	tile_manager = std::make_unique<TileManager>(&game_data, _pd3dDevice);
+	game_data.tile_manager = std::make_unique<TileManager>(&game_data, _pd3dDevice);
 
 	collision_manager = std::make_unique<CollisionManager>();
 	
 	// Camera that follows an object.
-	camera = std::make_unique<FollowCamera>(0.25f * XM_PI, game_data.aspect_ratio, 1.0f,
+	game_data.follow_camera = std::make_unique<FollowCamera>(0.25f * XM_PI, game_data.aspect_ratio, 1.0f,
 		10000.0f, nullptr, Vector3(0, 0, -100));
 
-	noise = std::make_unique<PerlinNoise>(rand() % 1000000 + 10000000);
-
-	/*float x = 0;
-	float y = game_data.window_height - 64;;
-	int amount = rand() % 500 + 100;
-	int iterator = 0;	
-	TileType type = TileType::BEDROCK;
-	for (int i = 0; i < amount; i++)
-	{	
-			
-
-		if (y < 256)
-			type = TileType::AIR;
-		else if (y > 256 && y <= 320)
-			type = TileType::BEDROCK;
-		else if (y > 320 && y <= 640)
-			type = TileType::DIRT;
-		else if (y > 640)
-			type = TileType::STONE;
-		tiles.push_back(tile_manager->createTile(i, type, Vector2(x, y)));
-		x += 64;
-		iterator++;
-		if (iterator == game_data.window_width / 64)
-		{
-			iterator = 0;
-			x = 0;
-			y +=64;
-		}
-	}*/
-
 	//Generates air tiles and assigns them a type using perlin noise.
-	createTiles();
-	game_data.tiles = tiles;
-	generateChunk();
-	game_data.tiles = tiles;
+	createChunk();
+	game_data.tiles = chunks[0]->GetTiles();
 
 	Sprite* sprite = new Sprite(L"../Assets/Player.dds", _pd3dDevice);
 	player = std::make_unique<Player>(sprite);
@@ -101,7 +68,6 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	player->GetPhysics()->enablePhysics(true);
 	player->GetPhysics()->enableGravity(true);
 	collision_manager->initPlayer(player.get());
-	game_data.follow_camera = camera.get();
 	game_data.game_state = GameState::PLAY;
 	game_data.follow_camera->SetTarget(player.get());
 
@@ -129,13 +95,6 @@ Game::~Game()
 	TwTerminate();
 }
 
-void TW_CALL ResetPos(void* clientData)
-{
-	// do something
-	Game* game = static_cast<Game*>(clientData);
-	game->GetPlayer()->SetPos(Vector2::Zero);
-}
-
 // Executes the basic game loop.
 bool Game::Tick()
 {
@@ -144,12 +103,12 @@ bool Game::Tick()
 	play_time = currentTime;
 
 	input_handler->Tick(&game_data);
-	tile_manager->Tick(&game_data);
+	game_data.tile_manager->Tick(&game_data);
 	collision_manager->tick(&game_data);
 
-	for (auto& tile : tiles)
+	for (auto& chunk : chunks)
 	{
-		tile->Tick(&game_data);
+		chunk->Tick(&game_data);
 	}
 	player->Tick(&game_data);
 
@@ -165,10 +124,10 @@ bool Game::Tick()
 
 void Game::Draw(ID3D11DeviceContext * _pd3dImmediateContext)
 {
-	draw_data.sprite_batch->Begin(SpriteSortMode_BackToFront, nullptr, nullptr, nullptr, nullptr, nullptr, camera->GetWorldMat());
-	for (auto& tile : tiles)
+	draw_data.sprite_batch->Begin(SpriteSortMode_BackToFront, nullptr, nullptr, nullptr, nullptr, nullptr, game_data.follow_camera->GetWorldMat());
+	for (auto& chunk : chunks)
 	{
-		tile->Draw(&draw_data);
+		chunk->Draw(&draw_data);
 
 	}
 
@@ -178,115 +137,11 @@ void Game::Draw(ID3D11DeviceContext * _pd3dImmediateContext)
 	TwDraw();
 }
 
-void Game::createTiles()
+void Game::createChunk()
 {
-	int id = 0;
-	for (int w = 0; w < game_data.window_width / game_data.TILE_WIDTH; w++)
-	{
-		for (int h = 0; h < game_data.window_height / game_data.TILE_HEIGHT; h++)
-		{
-			Vector2 pos = Vector2(w * game_data.TILE_WIDTH, h  * game_data.TILE_HEIGHT);
-			tiles.push_back(tile_manager->createTile(id, TileType::AIR, Vector2(pos)));
-			id++;
-		}
-	}
+	chunks.push_back(new Chunk(&game_data));
 }
 
 void Game::generateChunk()
 {
-	for (int i = 0; i < game_data.window_width / game_data.TILE_WIDTH; i++) //x = width 
-	{
-		int height = 2 + noise->generateNoise(i, game_data.TILE_HEIGHT / 6);
-
-		for (int j = game_data.window_height / game_data.TILE_HEIGHT; j > game_data.window_height / game_data.TILE_HEIGHT - height; j--) //y = height
-		{
-			Vector2 pos = Vector2(i * game_data.TILE_WIDTH, j  * game_data.TILE_HEIGHT);
-			for (auto& tile : game_data.tiles)
-			{
-				if (tile->GetPos() == pos)
-				{
-					int random = j == game_data.MAX_DEPTH - 1 ? rand() % 1 + 1 : rand() % 2 + 1;
-					if (j == game_data.MAX_DEPTH)
-					{
-						//tiles.push_back(tile_manager->createTile(i, TileType::BEDROCK, Vector2(pos)));
-						tile->SetTileType(TileType::BEDROCK);
-					}
-					else if (j > game_data.MAX_DEPTH - 4 && j < game_data.MAX_DEPTH && random == 1)
-					{
-						//tiles.push_back(tile_manager->createTile(game_data.tiles.size(), TileType::STONE, Vector2(pos)));
-						tile->SetTileType(TileType::STONE);
-					}
-					else
-					{
-						//tiles.push_back(tile_manager->createTile(i, TileType::DIRT, Vector2(pos)));
-						tile->SetTileType(TileType::DIRT);
-					}
-				}
-			}
-		}
-	}
-
-	for (auto& tile : game_data.tiles)
-	{
-		if (!tile->IsSurfaceTile() && tile->GetTileType() != TileType::AIR)
-		{
-			if (tile->checkSurfaceTile(&game_data))
-			{
-				tile->SetSurfaceTile(true);
-			}
-			else
-			{
-				tile->SetSurfaceTile(false);
-			}
-		}
-	}
-
-	/*
-	for (int i = 0; i < game_data.window_width / game_data.TILE_WIDTH; i++) //x = width 
-	{
-		int height = 2 + noise->generateNoise(i, game_data.TILE_HEIGHT / 6);
-
-		for (int j = game_data.window_height / game_data.TILE_HEIGHT; j > game_data.window_height / game_data.TILE_HEIGHT - height; j--) //y = height
-		{
-			Vector2 pos = Vector2(i * game_data.TILE_WIDTH, j  * game_data.TILE_HEIGHT);
-			int random = j == game_data.MAX_DEPTH - 1 ? rand() % 1 + 1 : rand() % 2 + 1;
-			if (j == game_data.MAX_DEPTH)
-			{
-				tiles.push_back(tile_manager->createTile(i, TileType::BEDROCK, Vector2(pos)));
-			}
-			else if (j > game_data.MAX_DEPTH - 4 && j < game_data.MAX_DEPTH && random == 1)
-			{
-				tiles.push_back(tile_manager->createTile(i, TileType::STONE, Vector2(pos)));
-			}
-			else
-			{
-				tiles.push_back(tile_manager->createTile(i, TileType::DIRT, Vector2(pos)));
-			}
-		}
-		
-		//TO DO - FILL REST OF TILES WITH AIR
-		//create all tiles using air and then loop through using perlin noise to set current tiles to something else???
-	}*/
-
-	/*
-	for (int i = 0; i < 600; i++)
-	{
-		tiles.push_back(tile_manager->createTile(i, TileType::AIR, Vector2(0, 0)));
-	}
-
-	for (int i = game_data.window_width / 64; i >= 0 ; i--) //x - width 
-	{
-		int height = 2 + noise->generateNoise(i, 16);
-		for (int j = height; j > 1; j--) //y - height
-		{
-			tiles[i]->SetTileType(TileType::DIRT);
-			tiles[i]->SetPos(Vector2(i * game_data.TILE_WIDTH, j * game_data.TILE_HEIGHT));
-		}
-	}
-	*/
-}
-
-Player* Game::GetPlayer()
-{
-	return player.get();
 }
