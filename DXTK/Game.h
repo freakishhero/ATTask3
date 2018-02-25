@@ -3,6 +3,7 @@
 #include "DrawData2D.h"
 #include "GameData.h"
 #include "StepTimer.h"
+#include "LevelLoader.h"
 #include <d3d11.h>
 #include <memory>
 #include <vector>
@@ -35,7 +36,7 @@ private:
 	HWND        hWnd;
 
 	void createChunk();
-	void generateChunk();
+
 	// Game Objects
 	GameData game_data;
 	DrawData2D draw_data;
@@ -43,6 +44,7 @@ private:
 	
 	std::unique_ptr<InputHandler> input_handler = nullptr;
 	std::unique_ptr<CollisionManager> collision_manager = nullptr;
+	std::unique_ptr<LevelLoader> level_loader = nullptr;
 	
 	std::vector<Chunk*> chunks;
 };

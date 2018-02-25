@@ -12,9 +12,10 @@ public:
 	virtual void Draw(DrawData2D* _DD) override;
 	bool IsVisible() const override;
 	void SetVisible(bool _visible) override;
-	void SetSelectedTile(Tile* _tile);
-	Tile* GetSelectedTile() const;
+	void SetTypeReplace(TileType _type);
+	TileType* GetTileReplace();
 
 private:
-	Tile* selected_tile = nullptr;
+	TileType tile_replace;
+	void ReplaceTile(Tile* _tile);
 };

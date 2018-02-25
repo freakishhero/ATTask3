@@ -51,6 +51,8 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	game_data.tile_manager = std::make_unique<TileManager>(&game_data, _pd3dDevice);
 
 	collision_manager = std::make_unique<CollisionManager>();
+
+	level_loader = std::make_unique<LevelLoader>();
 	
 	// Camera that follows an object.
 	game_data.follow_camera = std::make_unique<FollowCamera>(0.25f * XM_PI, game_data.aspect_ratio, 1.0f,
@@ -58,11 +60,13 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 
 	//Generates air tiles and assigns them a type using perlin noise.
 	createChunk();
+
+	//FIX THIS NOOOOOOB
 	game_data.tiles = chunks[0]->GetTiles();
 
 	Sprite* sprite = new Sprite(L"../Assets/Player.dds", _pd3dDevice);
 	player = std::make_unique<Player>(sprite);
-	Sprite* sprite1 = new Sprite(L"../Assets/Selection.dds", _pd3dDevice);
+	Sprite* sprite1 = new Sprite(L"../Assets/Selector.dds", _pd3dDevice);
 	player->SetTileEditor(new TileEditor(sprite1));
 	player->DisableEditMode();
 	player->GetPhysics()->enablePhysics(true);
@@ -84,7 +88,7 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	};
 
 	TwType tileType = TwDefineEnum("Block", editor_tiles, 6);
-	TwAddVarRW(tweakBar, "Selected Tile", tileType, player->GetTileReplace(),
+	TwAddVarRW(tweakBar, "Selected Tile", tileType, player->GetTileEditor()->GetTileReplace(),
 		" group='Scene' keyIncr=f1 keyDecr=f2 help='Change the tile to place' ");
 
 }
@@ -140,8 +144,4 @@ void Game::Draw(ID3D11DeviceContext * _pd3dImmediateContext)
 void Game::createChunk()
 {
 	chunks.push_back(new Chunk(&game_data));
-}
-
-void Game::generateChunk()
-{
 }
