@@ -1,6 +1,7 @@
 #pragma once
 #include <fstream>
 #include <iostream>
+#include <vector>
 class LevelLoader
 {
 public:
@@ -11,4 +12,5 @@ public:
 
 private:
 	std::fstream level_file;
+	std::vector<int> tile_types;
 };

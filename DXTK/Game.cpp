@@ -43,7 +43,7 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	ID3D11DeviceContext* pd3dImmediateContext;
 	_pd3dDevice->GetImmediateContext(&pd3dImmediateContext);
 	draw_data.sprite_batch = std::make_unique<SpriteBatch>(pd3dImmediateContext);
-	draw_data.font = std::make_unique<SpriteFont>(_pd3dDevice, L"..\\Assets\\calibri.spritefont");
+	draw_data.font = std::make_unique<SpriteFont>(_pd3dDevice, L"..\\Assets\\Fonts\\calibri.spritefont");
 
 	// Seed the random number generator.
 	srand(static_cast<unsigned int>(time(nullptr)));
@@ -63,16 +63,17 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 
 	//FIX THIS NOOOOOOB
 	game_data.tiles = chunks[0]->GetTiles();
-
-	Sprite* sprite = new Sprite(L"../Assets/Player.dds", _pd3dDevice);
+	level_loader->LoadLevel("level_01");
+	Sprite* sprite = new Sprite(L"../Assets/Sprites/Player/Player.dds", _pd3dDevice);
 	player = std::make_unique<Player>(sprite);
-	Sprite* sprite1 = new Sprite(L"../Assets/Selector.dds", _pd3dDevice);
+	Sprite* sprite1 = new Sprite(L"../Assets/Sprites/Player/Selector.dds", _pd3dDevice);
 	player->SetTileEditor(new TileEditor(sprite1));
 	player->DisableEditMode();
 	player->GetPhysics()->enablePhysics(true);
 	player->GetPhysics()->enableGravity(true);
 	collision_manager->initPlayer(player.get());
 	game_data.game_state = GameState::PLAY;
+
 	game_data.follow_camera->SetTarget(player.get());
 
 	//Tweak Bar Control Panel

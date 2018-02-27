@@ -10,7 +10,7 @@ TileManager::TileManager(GameData* _GD, ID3D11Device* _d3d_device)
 	for (int i = 0; i < _GD->TILE_SPRITES; i++)
 	{
 		std::string id = std::to_string(i);
-		std::string file_path = "../Assets/" + id + ".dds";
+		std::string file_path = "../Assets/Sprites/Tiles/DDS/" + id + ".dds";
 		const char* c_string = file_path.c_str();
 		tileSprites.push_back(new Sprite(charToWChar(c_string), _d3d_device));
 	}
