@@ -63,7 +63,6 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 
 	//FIX THIS NOOOOOOB
 	game_data.tiles = chunks[0]->GetTiles();
-	level_loader->LoadLevel("level_01");
 	Sprite* sprite = new Sprite(L"../Assets/Sprites/Player/Player.dds", _pd3dDevice);
 	player = std::make_unique<Player>(sprite);
 	Sprite* sprite1 = new Sprite(L"../Assets/Sprites/Player/Selector.dds", _pd3dDevice);
@@ -145,4 +144,13 @@ void Game::Draw(ID3D11DeviceContext * _pd3dImmediateContext)
 void Game::createChunk()
 {
 	chunks.push_back(new Chunk(&game_data));
+	std::vector<int> tile_types;
+	for (int i = 0; i < chunks[0]->GetTiles().size(); i++)
+	{
+		tile_types.push_back((int)chunks[0]->GetTiles()[i]->GetTileType());
+	}
+
+	level_loader->SaveLevel(tile_types);
+
+	//chunks[0]->LoadChunkFromTile(level_loader->LoadLevel("Level_01"));
 }

@@ -35,7 +35,7 @@ void CollisionManager::tick(GameData* _GD)
 		{
 			if (topCollision(player->GetCollisions(), tile->GetCollisions()))
 			{
-				std::cout << "top collision" << std::endl;
+				//std::cout << "top collision" << std::endl;
 				player->GetPhysics()->setVelocity(Vector2(0, 1.0));
 			}
 			else
@@ -47,26 +47,23 @@ void CollisionManager::tick(GameData* _GD)
 						player->GetPhysics()->setAcceleration(Vector2::Zero);
 					}
 
-					std::cout << "bottom collision" << std::endl;
+					//std::cout << "bottom collision" << std::endl;
 					player->GetPhysics()->enableGravity(false);
 					player->GetPhysics()->setVelocity(Vector2::Zero);
 					_GD->player_state = PlayerState::PS_GROUNDED;
-					//player->ModifyPos(Vector2(0, -20.0f) * _GD->delta_time);
 					player->SetPos(Vector2(player->GetPos().x, tile->GetPos().y - 64));
 				}
 
 				if (leftCollision(player->GetCollisions(), tile->GetCollisions()))
 				{
-					std::cout << "left collision" << std::endl;
-					//player->ModifyPos(Vector2(10.0f, -0.1f) * _GD->delta_time);
+					//std::cout << "left collision" << std::endl;
 					player->SetPos(Vector2(tile->GetPos().x + 64, player->GetPos().y));
 					player->SetMoveLeft(false);
 				}
 
 				if (rightCollision(player->GetCollisions(), tile->GetCollisions()))
 				{
-					std::cout << "right collision" << std::endl;
-					//player->ModifyPos(Vector2(-10.0f, -0.1f) * _GD->delta_time);
+					//std::cout << "right collision" << std::endl;
 					player->SetPos(Vector2(tile->GetPos().x - 64, player->GetPos().y));
 					player->SetMoveRight(false);
 				}

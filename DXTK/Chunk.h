@@ -16,6 +16,7 @@ public:
 	void Tick(GameData* _GD);
 	void Draw(DrawData2D* _DD);
 	std::vector<Tile*> GetTiles() const;
+	void LoadChunkFromTile(std::vector<int> tile_types);
 
 private:
 	int ID = 0;

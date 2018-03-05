@@ -93,3 +93,23 @@ std::vector<Tile*> Chunk::GetTiles() const
 {
 	return tiles;
 }
+
+void Chunk::LoadChunkFromTile(std::vector<int> tile_types)
+{
+	for (auto& tile : tiles)
+	{
+		tile->SetTileType(TileType::AIR);
+	}
+
+	for (auto& tile : tiles)
+	{
+		for (int type : tile_types)
+		{
+			if (type >= 0)
+			{
+				tile->SetTileType((TileType)type);
+				type = -1;
+			}
+		}
+	}
+}

@@ -8,9 +8,8 @@ public:
 	LevelLoader();
 	~LevelLoader();
 
-	void LoadLevel(std::string _file_name);
+	std::vector<int> LoadLevel(std::string _file_name);
+	void SaveLevel(std::vector<int> tile_types);
 
 private:
-	std::fstream level_file;
-	std::vector<int> tile_types;
 };
