@@ -103,12 +103,17 @@ void Chunk::LoadChunkFromTile(std::vector<int> tile_types)
 
 	for (auto& tile : tiles)
 	{
-		for (int type : tile_types)
+		for (int i = 0; i < tile_types.size(); i++)
 		{
-			if (type >= 0)
+			if (tile_types[i] >= 0)
 			{
-				tile->SetTileType((TileType)type);
-				type = -1;
+				tile->SetTileType((TileType)tile_types[i]);
+				tile_types[i] = -1;
+				break;
+			}
+			else 
+			{
+				tile->SetTileType(TileType::AIR);
 			}
 		}
 	}

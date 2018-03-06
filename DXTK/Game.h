@@ -30,6 +30,9 @@ public:
     bool Tick();
 	void Draw(ID3D11DeviceContext* _pd3dImmediateContext);
 
+	void SaveGame();
+	void LoadGame(std::string file_name);
+
 private:
     // Device resources.
 	DWORD play_time; //amount of time since the game started

@@ -32,12 +32,6 @@ std::vector<int> LevelLoader::LoadLevel(std::string _file_name)
 		std::cout << "File not found" << std::endl;
 	}
 
-	std::cout << "Tile Types:" << std::endl;
-	for (int i = 0; i < tile_types.size(); i++) 
-	{
-		std::cout << tile_types[i] << std::endl;
-	}
-
 	return tile_types;
 }
 

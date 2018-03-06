@@ -1,7 +1,34 @@
-﻿  Game.cpp
-  c:\program files (x86)\windows kits\8.1\include\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-c:\users\freakish hero\desktop\mems\attask3\dxtk\tilemanager.h(8): warning C4099: 'GameData': type name first seen using 'struct' now seen using 'class'
-  c:\users\freakish hero\desktop\mems\attask3\dxtk\game.h(12): note: see declaration of 'GameData'
-c:\users\freakish hero\desktop\mems\attask3\dxtk\game.cpp(148): warning C4018: '<': signed/unsigned mismatch
-  DXTK.vcxproj -> C:\Users\Freakish Hero\Desktop\MEMS\ATTask3\Debug\DXTK.exe
-  DXTK.vcxproj -> C:\Users\Freakish Hero\Desktop\MEMS\ATTask3\Debug\DXTK.pdb (Full PDB)
+﻿Build started 06/03/2018 21:34:24.
+     1>Project "D:\ATTask3\DXTK\DXTK.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\amd64_x86\CL.exe /c /ID:\ATTask3\packages\directxtk_desktop_2015.2017.12.13.1\build\native\../..//build/native/include/ /ID:\ATTask3\AntTweakBar\include /ZI /nologo /W3 /WX- /Od /Oy- /D HAS_DIRECTXTK /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /arch:SSE2 /fp:fast /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt LevelLoader.cpp
+         LevelLoader.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\amd64_x86\link.exe /ERRORREPORT:PROMPT /OUT:"D:\ATTask3\Debug\DXTK.exe" /INCREMENTAL /NOLOGO /LIBPATH:D:\ATTask3\AntTweakBar\include D:\ATTask3\packages\directxtk_desktop_2015.2017.12.13.1\build\native\../..//build/native/lib/Win32\Debug\DirectXTKAudioDX.lib D:\ATTask3\packages\directxtk_desktop_2015.2017.12.13.1\build\native\../..//build/native/lib/Win32\Debug\DirectXTK.lib d3d11.lib dxguid.lib uuid.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib AntTweakBar.lib AntTweakBar64.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /manifestinput:settings.manifest /Debug /PDB:"D:\ATTask3\Debug\DXTK.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\ATTask3\Debug\DXTK.lib" /MACHINE:X86 Debug\resource.res
+         Debug\Application.obj
+         Debug\Camera.obj
+         Debug\Chunk.obj
+         Debug\CollisionComponent.obj
+         Debug\CollisionManager.obj
+         Debug\FollowCamera.obj
+         Debug\Game.obj
+         Debug\GameObject.obj
+         Debug\GameObject2D.obj
+         Debug\InputHandler.obj
+         Debug\LevelLoader.obj
+         Debug\Main.obj
+         Debug\pch.obj
+         Debug\PerlinNoise.obj
+         Debug\PhysicsComponent.obj
+         Debug\Player.obj
+         Debug\Sprite.obj
+         Debug\SpriteGameObject.obj
+         Debug\Tile.obj
+         Debug\TileEditor.obj
+         Debug\TileManager.obj
+         DXTK.vcxproj -> D:\ATTask3\Debug\DXTK.exe
+     1>Done Building Project "D:\ATTask3\DXTK\DXTK.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.41

@@ -8,7 +8,6 @@
 SpriteGameObject::SpriteGameObject(Sprite* _texture, RECT* _rect)
 	: sprite(_texture)
 	, visible(true)
-	, rect(_rect)
 {
 	physics = new PhysicsComponent(pos, Vector2(0, 10.0f), 0.1f, 5.0f);
 	physics->enableGravity(false);
@@ -18,7 +17,11 @@ SpriteGameObject::SpriteGameObject(Sprite* _texture, RECT* _rect)
 
 SpriteGameObject::~SpriteGameObject()
 {
-
+	if (sprite)
+	{
+		sprite = nullptr;
+		delete sprite;
+	}
 }
 
 void SpriteGameObject::Tick(GameData* _GD)
@@ -41,7 +44,7 @@ void SpriteGameObject::Tick(GameData* _GD)
 void SpriteGameObject::Draw(DrawData2D* _DD)
 {
 	if (sprite && visible)
-		_DD->sprite_batch->Draw(sprite->getResourceView(), pos, rect, color, rot, origin, scale, SpriteEffects_None);
+		_DD->sprite_batch->Draw(sprite->getResourceView(), pos, nullptr, color, rot, origin, scale, SpriteEffects_None);
 }
 
 Sprite* SpriteGameObject::GetSprite() const
@@ -83,16 +86,6 @@ bool SpriteGameObject::IsVisible() const
 void SpriteGameObject::SetVisible(bool _visible)
 {
 	visible = _visible;
-}
-
-RECT* SpriteGameObject::GetRect() const
-{
-	return rect;
-}
-
-void SpriteGameObject::SetRect(RECT* _rect)
-{
-	rect = _rect;
 }
 
 PhysicsComponent * SpriteGameObject::GetPhysics() const

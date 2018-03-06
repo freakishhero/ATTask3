@@ -22,16 +22,12 @@ public:
 	virtual bool IsVisible() const;
 	virtual void SetVisible(bool _visible);
 
-	RECT* GetRect() const;
-	void SetRect(RECT* _rect);
-
 	PhysicsComponent* GetPhysics() const;
 	CollisionComponent* GetCollisions() const;
 	
 protected:
 	Sprite* sprite;
 	bool visible;
-	RECT* rect;
 	PhysicsComponent* physics;
 	CollisionComponent* collisions;
 

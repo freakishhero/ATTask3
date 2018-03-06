@@ -13,7 +13,6 @@
 #include "FollowCamera.h"
 
 Player::Player(Sprite* _sprite)
-	: visible(true)
 {
 	player_state = PlayerState::PS_GROUNDED;
 	sprite = _sprite;

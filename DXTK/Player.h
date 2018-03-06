@@ -28,9 +28,6 @@ public:
 private:
 	PlayerState player_state;
 	TileEditor* tile_editor;
-	float move_speed;
-	float jump_height;
-	bool visible;
 	bool can_move_left;
 	bool can_move_right;
 	bool can_move_down;

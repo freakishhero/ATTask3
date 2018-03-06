@@ -122,6 +122,14 @@ bool Game::Tick()
 	{
 		return false;
 	}
+	if (game_data.keyboard_state[DIK_F3] & 0x80)
+	{
+		SaveGame();
+	}
+	if (game_data.keyboard_state[DIK_F4] & 0x80)
+	{
+		LoadGame("Level_02");
+	}
 
 	return true;
 }
@@ -141,9 +149,8 @@ void Game::Draw(ID3D11DeviceContext * _pd3dImmediateContext)
 	TwDraw();
 }
 
-void Game::createChunk()
+void Game::SaveGame()
 {
-	chunks.push_back(new Chunk(&game_data));
 	std::vector<int> tile_types;
 	for (int i = 0; i < chunks[0]->GetTiles().size(); i++)
 	{
@@ -151,6 +158,16 @@ void Game::createChunk()
 	}
 
 	level_loader->SaveLevel(tile_types);
-
-	//chunks[0]->LoadChunkFromTile(level_loader->LoadLevel("Level_01"));
+	std::cout << "Level saved!" << std::endl;
 }
+
+void Game::LoadGame(std::string file_name)
+{
+	chunks[0]->LoadChunkFromTile(level_loader->LoadLevel(file_name));
+	std::cout << "Level succesfully loaded!" << std::endl;
+}
+
+void Game::createChunk()
+{
+	chunks.push_back(new Chunk(&game_data));
+} 
