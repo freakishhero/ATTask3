@@ -11,9 +11,10 @@ Chunk::Chunk(GameData* _GD)
 
 	int id = 0;
 	//Maybe store the min and max pos values for each chunk?
-	for (int w = 0; w < 1920 / _GD->TILE_WIDTH; w++)
+	for (int h = 0; h < 1080 / _GD->TILE_HEIGHT; h++)
 	{
-		for (int h = 0; h < 1080 / _GD->TILE_HEIGHT; h++)
+
+		for (int w = 0; w < 1920 / _GD->TILE_WIDTH; w++)
 		{
 			Vector2 pos = Vector2(w * _GD->TILE_WIDTH, h  * _GD->TILE_HEIGHT);
 			tiles.push_back(_GD->tile_manager->createTile(id, TileType::AIR, Vector2(pos)));

@@ -3,6 +3,9 @@
 #include "SimpleMath.h"
 #include <vector>
 
+using namespace DirectX;
+using namespace SimpleMath;
+
 enum class TileType;
 class Tile;
 class GameData;
@@ -17,6 +20,8 @@ public:
 	Tile* createTile(int ID, TileType _type, DirectX::SimpleMath::Vector2 _position);
 	wchar_t* charToWChar(const char* _string);
 	void Tick(GameData* _GD);
+	Tile* GetTileFromWorld(Vector2 pos, GameData* _GD);
+	void HandleGrass(GameData* _GD);
 
 private:
 	std::vector<Sprite*> tileSprites;

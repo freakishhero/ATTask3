@@ -61,8 +61,7 @@ TileType Tile::GetTileType() const
 
 bool Tile::IsSurfaceTile()
 {
-	return surface_tile
-		;
+	return surface_tile;
 }
 
 void Tile::SetSurfaceTile(bool _state)
@@ -87,7 +86,7 @@ bool Tile::isDestructable()
 
 bool Tile::checkSurfaceTile(GameData* _GD)
 {
-	for (auto& tile : _GD->tiles)
+	/*for (auto& tile : _GD->tiles)
 	{
 		if (tile != this && tile->GetPos().x == this->pos.x)
 		{
@@ -99,7 +98,7 @@ bool Tile::checkSurfaceTile(GameData* _GD)
 				}
 			}
 		}
-	}
+	}*/
 	return false;
 }
 

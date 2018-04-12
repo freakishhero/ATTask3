@@ -1,10 +1,12 @@
 #include "TileEditor.h"
 #include "DrawData2D.h"
 #include "Tile.h"
+#include "TileManager.h"
 #include "Sprite.h"
 #include "SpriteGameObject.h"
 #include "FollowCamera.h"
 #include "GameData.h"
+#include <iostream>
 
 TileEditor::TileEditor(Sprite* _sprite)
 {
@@ -19,21 +21,28 @@ TileEditor::~TileEditor()
 void TileEditor::Tick(GameData * _GD)
 {
 	pos = Vector2(
-		(_GD->mouse_pos.x - ((_GD->window_width / 2) - _GD->follow_camera->GetPos().x)) - _GD->TILE_WIDTH / 2,
-		(_GD->mouse_pos.y - ((_GD->window_height / 2) - _GD->follow_camera->GetPos().y)) - _GD->TILE_HEIGHT / 2);
+		(_GD->mouse_pos.x - ((_GD->window_width / 2) - _GD->follow_camera->GetPos().x)),
+		(_GD->mouse_pos.y - ((_GD->window_height / 2) - _GD->follow_camera->GetPos().y)));
 
 	if (_GD->mouse_state->rgbButtons[0])
 	{
-		for (auto& tile : _GD->tiles)
+		Tile* tile = _GD->tile_manager->GetTileFromWorld(pos, _GD);
+
+		if (tile != nullptr)
 		{
-			if (pos.x > tile->GetPos().x - _GD->TILE_WIDTH / 2 && pos.x < tile->GetPos().x + _GD->TILE_WIDTH / 2)
+			if (tile->isDestructable())
 			{
-				if (pos.y > tile->GetPos().y - _GD->TILE_HEIGHT / 2 && pos.y < tile->GetPos().y + _GD->TILE_HEIGHT / 2)
+				ReplaceTile(tile);
+
+				int index = tile->GetID();
+				int bot_x = index % 30;
+				int bot_y = (index / 30) + 1;
+
+				int bot_index = 30 * bot_y + bot_x;
+
+				if (_GD->tiles[bot_index]->GetTileType() == TileType::GRASS)
 				{
-					if (tile->isDestructable())
-					{
-						ReplaceTile(tile);
-					}
+					_GD->tiles[bot_index]->SetTileType(TileType::DIRT);
 				}
 			}
 		}
@@ -45,7 +54,7 @@ void TileEditor::Draw(DrawData2D * _DD)
 {
 	if (visible)
 	{
-		_DD->sprite_batch->Draw(sprite->getResourceView(), Vector2(pos.x + 16, pos.y + 16), nullptr, color, rot, origin, scale, SpriteEffects_None);
+		_DD->sprite_batch->Draw(sprite->getResourceView(), Vector2(pos.x - 16, pos.y - 16), nullptr, color, rot, origin, scale, SpriteEffects_None);
 	}
 }
 
@@ -68,6 +77,7 @@ TileType* TileEditor::GetTileReplace()
 {
 	return &tile_replace;
 }
+
 
 void TileEditor::ReplaceTile(Tile* _tile)
 {
